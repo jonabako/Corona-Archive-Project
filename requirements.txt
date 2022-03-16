@@ -1,0 +1,2 @@
+Flask-MySQLdb==1.0.1
+PyYaml==6.0
