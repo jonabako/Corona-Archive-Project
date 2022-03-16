@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Agent tools {% endblock %}</h1>
+    <h2> Search infected people </h2>
+    <select name="visitors">
+        <option value="invalid"> Search people </option>
+        {% for i in infected_people %}
+	        <OPTION value={{i[0]}}>{{i[1]}}</OPTION>
+        {% endfor %}
+        </select> <br>
+        <h2> Search infected places </h2>
+        <select name="places">
+        <option value="invalid"> Search infected places </option>
+        {% for i in infected_places %}
+	        <OPTION value={{i[0]}}>{{i[1]}}</OPTION>
+        {% endfor %}
+{% endblock %}

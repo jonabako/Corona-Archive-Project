@@ -1,0 +1,14 @@
+body {
+    font-famiily: sans-serif;
+}
+
+a {
+    color: #d64161;
+    font-size: 2em;
+    text-decoration: none;
+  }
+  
+  #HASH {
+    display: flex;
+    justify-content: space-between;
+  }
