@@ -11,7 +11,6 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 
 mysql = MySQL(app)
-mysql.connect()
 
 def get_cursor():
     cursor = mysql.connection.cursor()
@@ -28,7 +27,7 @@ def impressum():
 @app.route('/agent_tools')
 def agent_tools():
     cur = get_cursor()
-    cur.execute('SELECT visitor_id, visitor_name FROM Visitor WHERE infected')
+    cur.execute('''SELECT citizen_id, visitor_name FROM Visitor WHERE infected''')
     infected_people = cur.fetchall()
     # Struggling to figure out the query for places with infected visitors
     cur.execute('SELECT place_id, place_name FROM Places')
