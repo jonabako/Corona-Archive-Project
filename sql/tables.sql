@@ -13,6 +13,7 @@ CREATE TABLE `Visitor` (
   `email` varchar(50) NOT NULL,
   `device_id` varchar(50) NOT NULL,
   `infected` bit NOT NULL,
+  `password` varchar(50) NOT NULL,
   PRIMARY KEY (`citizen_id`)
 );
 
