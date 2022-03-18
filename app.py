@@ -18,9 +18,9 @@ app.config['MYSQL_DATABASE_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DATABASE_DB'] = db['mysql_db']
 
 # init app
-auto = Autodoc(app)
 mysql = MySQL()
 mysql.init_app(app)
+auto = Autodoc(app)
 
 # function to que mysql cursor
 def get_cursor():

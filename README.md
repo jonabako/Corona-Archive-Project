@@ -1,6 +1,5 @@
 # SE-Sprint01-Team26
 
-
 #### We ask the following be considered when grading:
 * Only 9 days implementation time was given for first sprint
 * Volen was lost in the organization of the project (didn't receive repository access until monday of the week of the deadline), since he wasn't properly registered in time. Some time was required to catch him up to the current status of the project.
@@ -14,7 +13,7 @@
 * Created hospital sign in page, with working static information from backend connection
 * Created agent sign in page, with working static information from backend connection
 * Styled the pages with custom css
-* TODO: documentation
+* Implemented documentation in addition to comment the code
 # Suggested changes to requirements document
 
 * change entry_date and entry_time entries in VisitorToPlace table for single entry_timestamp entry.
@@ -59,6 +58,9 @@ $ touch db.yaml
 # Open db.yaml (with preffered text editor) and enter database credentials in the file format described below
 $ nano db.yaml
 
+# Install requirements.txt
+$ pip install -r "requirements.txt"
+
 # Run python server
 $ python3 app.py
 
@@ -77,3 +79,8 @@ mysql_db: "seteam26"
 ### To run tests
 ```
 python3 tests/test.py
+```
+### To see documentation
+```go to url
+http://127.0.0.1:5000/docs
+```
