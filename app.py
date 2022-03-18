@@ -1,9 +1,5 @@
-from ast import Return
-from crypt import methods
-from pdb import post_mortem
 from flask import Flask, render_template, redirect, url_for, request
 from flaskext.mysql import MySQL
-
 import yaml
 import os
 
@@ -27,27 +23,20 @@ def get_cursor():
 
 @app.route('/', methods=['POST','GET'])
 def visitorRegister():
-    print('here1')
     error = None
     cur = get_cursor()
-    if request.method == 'POST' and 'name' in request.form  and 'address' in request.form and  'city' in request.form and 'password' in request.form:
+    if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
+    and  'city' in request.form and 'password' in request.form:
         print('here2')
-        citizenId = 1 #make dynamic
         name = request.form['name']
         address = request.form['address'] + request.form['city']
-        phoneNumber = '12345678' #make dynamic
-        email = 'user@gmail.com' #make dynamic
-        device_id = '12345' #make dynamic
         password = request.form['password']
-        infected = False
-        cur.execute('INSERT INTO Visitor (citizen_id,visitor_name,address,phone_number,email,device_id,infected,password) \
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s)' , 
-                    (citizenId,name, address,phoneNumber,email, device_id,infected,password))
+        cur.execute('INSERT INTO Visitor (visitor_name,address,password) \
+                VALUES (%s,%s,%s)' , (name, address,password))
         mysql.get_db().commit()  
         cur.close()
         return redirect(url_for('scanQR'))
     else:
-        print('here3')
         return render_template('index.html', error=error)
 
 @app.route('/scanQR')
