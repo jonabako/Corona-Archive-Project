@@ -3,9 +3,6 @@
 {% block content %}
 
 <h1>{% block title %} Visitor Registration {% endblock %}</h1>
-<div class="agentTools">
-    <b href="/agent_tools"> Agent queries
-</div>
 
 
 <div id="registration">
@@ -15,9 +12,6 @@
         <input type="text" class="visitor-registration" placeholder="City" name="city" value="{{request.form.city }}" required> <br>
         <input type="password" class="visitor-registration" placeholder="Password" name="password" value="{{request.form.password }}" required> <br>
         <input class="mainButton" type="submit" value="Login"><br>
-        {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-            {% endif %}
     </form>
 </div>
 
