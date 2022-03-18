@@ -73,3 +73,7 @@ mysql_user: "{YOUR USERNAME}"
 mysql_password: "{YOUR PASSWORD}"
 mysql_db: "seteam26"
 ```
+
+### To run tests
+```
+python3 tests/test.py
