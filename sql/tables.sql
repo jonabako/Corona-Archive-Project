@@ -58,3 +58,6 @@ CREATE TABLE `Hospital` (
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`hospital_id`)
 );
+
+INSERT INTO `Agent` (`username`, `password`) VALUES ('agent1','arM54764jd?');
+INSERT INTO `Hospital` (`username`, `password`) VALUES ('hospital1', 'wersdc?44');
