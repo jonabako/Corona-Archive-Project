@@ -24,7 +24,7 @@ $ virtualenv env
 $ source env/bin/activate
 
 # Open  MySQL
-$ mysql -u {ENTER YOUR USERNAME OR ROOT} -p
+$ mysql -u {YOUR USERNAME OR ROOT} -p
 
 # Run this command in MYSQL command line to create required database.
 mysql> source sql/tables.sql
@@ -40,9 +40,20 @@ $ nano db.yaml
 $ python3 app.py
 
 ```
+### `db.yaml` file Format. Enter your respective credentials
+
+We used a local environemnt to run flask project, as we couldn't figure out how to make flask work on clamv.
+
+```yaml
+mysql_host: "127.0.0.1"
+mysql_user: "{YOUR USERNAME}"
+mysql_password: "{YOUR PASSWORD}"
+mysql_db: "seteam26"
+```
 
 
 # Suggested changes to requirements document
 
 * change entry_date and entry_time entries in VisitorToPlace table for single entry_timestamp entry.
 * change exit_date and exit_time entries in VisitorToPlace table for single exit_timestamp entry.
+* add password field to the Visitor table.
