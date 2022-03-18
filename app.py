@@ -28,9 +28,18 @@ def get_cursor():
     return cursor
 
 
+# visitor registration page
 @app.route('/', methods=['POST','GET'])
 @auto.doc()
 def visitorRegister():
+    """Landing page, registration page for visitors.
+    Form Data: 
+        name: name of visitor
+        password: password of visitor
+        address: address of visitor
+        city: city of visitor
+    All fields are required.
+    """
     cur = get_cursor()
     if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
     and  'city' in request.form and 'password' in request.form:
@@ -45,8 +54,17 @@ def visitorRegister():
     else:
         return render_template('index.html')
 
+# agent sign in page
 @app.route('/agent-signin', methods=['POST', 'GET'])
+@auto.doc()
 def agentSignin():
+    """login page for agents.
+    Form Data: 
+        username: username of agent
+        password: password of agent
+    All fields are required.
+    Must be a correct combination in the database
+    """
     error = None
     cur = get_cursor()
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
@@ -67,8 +85,17 @@ def agentSignin():
     else:
         return render_template('agent_signin.html')
 
+#hospital sign in page
 @app.route('/hospital-signin', methods=['POST', 'GET'])
+@auto.doc()
 def hospitalSignin():
+    """login page for hospital.
+    Form Data: 
+        username: username of hospital
+        password: password of hospital
+    All fields are required.
+    Must be a correct combination in the database
+    """
     error = None
     cur = get_cursor()
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
@@ -89,17 +116,25 @@ def hospitalSignin():
     else:
         return render_template('hospital_signin.html')
 
+# scanQR page
 @app.route('/scanQR')
+@auto.doc()
 def scanQR():
     return render_template('scanQR.html')
 
+# impressum page
 @app.route('/impressum',methods=['POST','GET'])
+@auto.doc()
 def impressum():
     return render_template('imprint.html')
 
+# agent tools page
 @app.route('/agent_tools', methods=['POST','GET'])
 @auto.doc()
 def agent_tools():
+    """agent tools page.
+    Implementation pending
+    """
     cur = get_cursor()
     cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
@@ -110,13 +145,13 @@ def agent_tools():
     return render_template('agent_tools.html',
         infected_people = infected_people, infected_places = infected_places)
 
-# Add /docs at the end of the standard link for the documentation
-@app.route('/docs')
-def docs():
-    return auto.html(title='Corona Center API Docs')
-
+#hospital tools page
 @app.route('/hospital_tools',methods=['POST','GET'])
+@auto.doc()
 def hospital_tools():
+    """hospital tools page.
+    Implementation pending
+    """
     cur = get_cursor()
     cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
@@ -125,6 +160,10 @@ def hospital_tools():
     infected_places = cur.fetchall()
     return render_template('hospital_tools.html', infected_people = infected_people, infected_places = infected_places)
 
+# Add /docs at the end of the standard link for the documentation
+@app.route('/docs')
+def docs():
+    return auto.html(title='Corona Center API Docs')
 
 if __name__ == "__main__":
     app.run(debug = True)
