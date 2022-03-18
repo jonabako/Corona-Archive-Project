@@ -23,7 +23,6 @@ def get_cursor():
 
 @app.route('/', methods=['POST','GET'])
 def visitorRegister():
-    error = None
     cur = get_cursor()
     if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
     and  'city' in request.form and 'password' in request.form:
@@ -37,7 +36,7 @@ def visitorRegister():
         cur.close()
         return redirect(url_for('scanQR'))
     else:
-        return render_template('index.html', error=error)
+        return render_template('index.html')
 
 @app.route('/scanQR')
 def scanQR():
