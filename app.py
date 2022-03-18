@@ -32,7 +32,7 @@ def visitorRegister():
         password = request.form['password']
         cur.execute('INSERT INTO Visitor (visitor_name,address,password) \
                 VALUES (%s,%s,%s)' , (name, address,password))
-        mysql.get_db().commit()  
+        mysql.get_db().commit()
         cur.close()
         return redirect(url_for('scanQR'))
     else:

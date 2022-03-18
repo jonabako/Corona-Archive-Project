@@ -39,7 +39,7 @@ CREATE TABLE `VisitorToPlaces` (
   PRIMARY KEY (`QRcode`),
   FOREIGN KEY (`citizen_id`) REFERENCES Visitor(`citizen_id`),
   FOREIGN KEY (`place_id`) REFERENCES Places(`place_id`)
-  
+
 );
 DROP TABLE IF EXISTS `Agent`;
 
