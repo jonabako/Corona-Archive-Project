@@ -9,10 +9,11 @@
     <div class="topnav">
       <a href="{{ url_for('visitorRegister') }}"> Corona Archive </a>
       <a href="{{ url_for('impressum') }}"> Impressum </a>
-      <a href="{{ url_for('agent_tools') }}"> Agent tools </a>
+      <a href="{{ url_for('agentSignin') }}"> Agent Signin </a>
+      <a href="{{ url_for('hospitalSignin') }}"> Hospital Signin </a>
     </div>
     <br>
-    <div class="content">
+    <div>
       {% block content %} {% endblock %}
     </div>
 

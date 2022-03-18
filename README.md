@@ -11,10 +11,10 @@
 * Setup database: created tables.sql document that contains required tables for project
 * Setup connection in app.py to the database
 * Created landing page with registration for visitors, with working backend connection
+* Created hospital sign in page, with working static information from backend connection
+* Created agent sign in page, with working static information from backend connection
 * Styled the pages with custom css
-* TODO: create more registration/login pages
 * TODO: documentation
-* TODO: tests
 # Suggested changes to requirements document
 
 * change entry_date and entry_time entries in VisitorToPlace table for single entry_timestamp entry.
@@ -73,3 +73,7 @@ mysql_user: "{YOUR USERNAME}"
 mysql_password: "{YOUR PASSWORD}"
 mysql_db: "seteam26"
 ```
+
+### To run tests
+```
+python3 tests/test.py
