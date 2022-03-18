@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="topnav">
-      <a href="{{ url_for('landing') }}"> Corona Archive </a>
+      <a href="{{ url_for('visitorRegister') }}"> Corona Archive </a>
       <a href="{{ url_for('impressum') }}"> Impressum </a>
       <a href="{{ url_for('agent_tools') }}"> Agent tools </a>
     </div>
@@ -15,5 +15,6 @@
     <div class="content">
       {% block content %} {% endblock %}
     </div>
+
   </body>
 </html>

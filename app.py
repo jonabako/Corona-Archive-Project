@@ -1,33 +1,55 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_mysqldb import MySQL
+from flaskext.mysql import MySQL
 import yaml
+import os
 
 app = Flask(__name__)
 
-db = yaml.safe_load(open('db.yaml'))
-app.config['MYSQL_HOST'] = db['mysql_host']
-app.config['MYSQL_USER'] = db['mysql_user']
-app.config['MYSQL_PASSWORD'] = db['mysql_password']
-app.config['MYSQL_DB'] = db['mysql_db']
+app.secret_key = os.urandom(16)
 
-mysql = MySQL(app)
+
+db = yaml.safe_load(open('db.yaml'))
+app.config['MYSQL_DATABASE_HOST'] = db['mysql_host']
+app.config['MYSQL_DATABASE_USER'] = db['mysql_user']
+app.config['MYSQL_DATABASE_PASSWORD'] = db['mysql_password']
+app.config['MYSQL_DATABASE_DB'] = db['mysql_db']
+
+mysql = MySQL()
+mysql.init_app(app)
 
 def get_cursor():
-    cursor = mysql.connection.cursor()
+    cursor = mysql.get_db().cursor()
     return cursor
 
-@app.route('/')
-def landing():
-    return render_template('index.html')
+@app.route('/', methods=['POST','GET'])
+def visitorRegister():
+    cur = get_cursor()
+    if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
+    and  'city' in request.form and 'password' in request.form:
+        print('here2')
+        name = request.form['name']
+        address = request.form['address'] + request.form['city']
+        password = request.form['password']
+        cur.execute('INSERT INTO Visitor (visitor_name,address,password) \
+                VALUES (%s,%s,%s)' , (name, address,password))
+        mysql.get_db().commit()
+        cur.close()
+        return redirect(url_for('scanQR'))
+    else:
+        return render_template('index.html')
 
-@app.route('/impressum')
+@app.route('/scanQR')
+def scanQR():
+    return render_template('scanQR.html')
+
+@app.route('/impressum',methods=['POST','GET'])
 def impressum():
     return render_template('imprint.html')
 
-@app.route('/agent_tools')
+@app.route('/agent_tools',methods=['POST','GET'])
 def agent_tools():
     cur = get_cursor()
-    cur.execute('''SELECT citizen_id, visitor_name FROM Visitor WHERE infected''')
+    cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
     # Struggling to figure out the query for places with infected visitors
     cur.execute('SELECT place_id, place_name FROM Places')
