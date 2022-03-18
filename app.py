@@ -1,11 +1,13 @@
 from flask import Flask, render_template, redirect, session, url_for, request
 from flaskext.mysql import MySQL
 import yaml
+from flask_selfdoc import Autodoc
 import os
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(16)
+
 
 
 #mysql configuration
@@ -16,6 +18,7 @@ app.config['MYSQL_DATABASE_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DATABASE_DB'] = db['mysql_db']
 
 # init app
+auto = Autodoc(app)
 mysql = MySQL()
 mysql.init_app(app)
 
@@ -24,7 +27,9 @@ def get_cursor():
     cursor = mysql.get_db().cursor()
     return cursor
 
+
 @app.route('/', methods=['POST','GET'])
+@auto.doc()
 def visitorRegister():
     cur = get_cursor()
     if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
@@ -92,15 +97,23 @@ def scanQR():
 def impressum():
     return render_template('imprint.html')
 
-@app.route('/agent_tools',methods=['POST','GET'])
+@app.route('/agent_tools', methods=['POST','GET'])
+@auto.doc()
 def agent_tools():
     cur = get_cursor()
     cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
     # Struggling to figure out the query for places with infected visitors
+    # TO DO
     cur.execute('SELECT place_id, place_name FROM Places')
     infected_places = cur.fetchall()
-    return render_template('agent_tools.html', infected_people = infected_people, infected_places = infected_places)
+    return render_template('agent_tools.html',
+        infected_people = infected_people, infected_places = infected_places)
+
+# Add /docs at the end of the standard link for the documentation
+@app.route('/docs')
+def docs():
+    return auto.html(title='Corona Center API Docs')
 
 @app.route('/hospital_tools',methods=['POST','GET'])
 def hospital_tools():
