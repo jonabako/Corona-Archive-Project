@@ -9,9 +9,9 @@ CREATE TABLE `Visitor` (
   `citizen_id` int NOT NULL AUTO_INCREMENT,
   `visitor_name` varchar(50) NOT NULL,
   `address` varchar(150) NOT NULL,
-  `phone_number` varchar(20) NULL,
-  `email` varchar(50)NULL,
-  `device_id` varchar(50) NULL,
+  `email` varchar(50) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
+  `device_id` varchar(50) NOT NULL,
   `infected` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`citizen_id`)
 );
@@ -22,6 +22,8 @@ CREATE TABLE `Places` (
   `place_id` int NOT NULL AUTO_INCREMENT,
   `place_name` varchar(50) NOT NULL,
   `address` varchar(150) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
   `QRcode` varchar(150) NOT NULL,
   PRIMARY KEY (`place_id`)
 );

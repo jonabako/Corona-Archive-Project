@@ -35,7 +35,7 @@ def index():
     return render_template('index.html')
 
 # visitor registration page
-@app.route('/visitor-signin', methods=['POST','GET'])
+@app.route('/visitor-registration', methods=['POST','GET'])
 @auto.doc()
 def visitorRegister():
     """Landing page, registration page for visitors.
@@ -47,18 +47,46 @@ def visitorRegister():
     All fields are required.
     """
     cur = get_cursor()
-    if request.method == 'POST' and 'name' in request.form  and 'address' in request.form \
-    and  'city' in request.form and 'password' in request.form:
-        name = request.form['name']
-        address = request.form['address'] + request.form['city']
-        password = request.form['password']
-        cur.execute('INSERT INTO Visitor (visitor_name,address,password) \
-                VALUES (%s,%s,%s)' , (name, address,password))
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
+    and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
+        name = request.form['fname'] + " " + request.form['lname']
+        address = request.form['address'] + ", " + request.form['city']
+        email = request.form['email']
+        phone = request.form['phone']
+        cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
+                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
         mysql.get_db().commit()
         cur.close()
-        return redirect(url_for('scanQR'))
+        return redirect(url_for('visitorHomepage'))
     else:
-        return render_template('index.html')
+        return render_template('visitor_registration.html')
+
+# place registration page
+@app.route('/place-registration', methods=['POST','GET'])
+@auto.doc()
+def placeRegister():
+    """Landing page, registration page for visitors.
+    Form Data: 
+        name: name of visitor
+        password: password of visitor
+        address: address of visitor
+        city: city of visitor
+    All fields are required.
+    """
+    cur = get_cursor()
+    if request.method == 'POST' and 'name' in request.form and 'address' in request.form \
+    and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
+        name = request.form['name']
+        address = request.form['address'] + ", " + request.form['city']
+        email = request.form['email']
+        phone = request.form['phone']
+        cur.execute('INSERT INTO Places (place_name,address,email,phone_number) \
+                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
+        mysql.get_db().commit()
+        cur.close()
+        return redirect(url_for('placeHomepage'))
+    else:
+        return render_template('place_registration.html')
 
 # agent sign in page
 @app.route('/agent-signin', methods=['POST', 'GET'])
@@ -122,11 +150,17 @@ def hospitalSignin():
     else:
         return render_template('hospital_signin.html')
 
-# scanQR page
-@app.route('/scanQR')
+# visitor homepage
+@app.route('/visitor-homepage')
 @auto.doc()
-def scanQR():
-    return render_template('scanQR.html')
+def visitorHomepage():
+    return render_template('visitor_homepage.html')
+
+# place homepage
+@app.route('/place-homepage')
+@auto.doc()
+def placeHomepage():
+    return render_template('place_homepage.html')
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])
