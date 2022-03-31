@@ -96,3 +96,9 @@ or alternatively
 ```
 $ pip3 install -Iv {nameofpackage==version}
 ```
+
+--------------------------------------------------
+# Sprint Progress Team 2, Qais Qamhia and Vahid Nesro
+
+
+
