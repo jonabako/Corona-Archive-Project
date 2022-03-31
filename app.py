@@ -28,8 +28,14 @@ def get_cursor():
     return cursor
 
 
+#homepage render 
+@app.route('/')
+@auto.doc()
+def index():
+    return render_template('index.html')
+
 # visitor registration page
-@app.route('/', methods=['POST','GET'])
+@app.route('/visitor-signin', methods=['POST','GET'])
 @auto.doc()
 def visitorRegister():
     """Landing page, registration page for visitors.
@@ -164,6 +170,7 @@ def hospital_tools():
 @app.route('/docs')
 def docs():
     return auto.html(title='Corona Center API Docs')
+
 
 if __name__ == "__main__":
     app.run(debug = True)
