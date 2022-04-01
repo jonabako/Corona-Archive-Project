@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
 
+<h1>{% block title %} Home {% endblock %}</h1>
+
+
 {% block content %}
 
-<h1>{% block title %} Visitor Registration {% endblock %}</h1>
+    <div class="back-drop-container">
+        
+        <img  src="{{ pic1 }}" alt="background picture of woman with mask" class="backdrop-img">
+        <div class="title-flex">
+           
+            <div class="title-flex-items title">Corona Archive</div>
+            <div class="title-flex-items description">Tracking, displaying, evaluating, and archiving of the corona infections in every location.</div>
 
+            <div class="registration-flex">
+                <div class="reg-items one">VISITOR</div>
+                <div class="reg-items two">PLACE</div>
+                <div class="reg-items three">HOSPITAL</div>
+                <div class="reg-items four">AGENCY</div>
+            </div>
 
-<div id="registration">
-    <form action="{{ url_for('visitorRegister') }}" method="post">
-        <input type="text" class="visitor-registration" placeholder="Name" name="name" value="{{request.form.name }}" required> <br>
-        <input type="text" class="visitor-registration" placeholder="Address" name="address" value="{{request.form.address }}" required> <br>
-        <input type="text" class="visitor-registration" placeholder="City" name="city" value="{{request.form.city }}" required> <br>
-        <input type="password" class="visitor-registration" placeholder="Password" name="password" value="{{request.form.password }}" required> <br>
-        <input class="mainButton" type="submit" value="Register"><br>
-    </form>
-</div>
-
+        </div>
+    
 
 {% endblock %}
+
 
