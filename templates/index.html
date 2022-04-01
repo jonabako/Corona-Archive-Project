@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-<h1>{% block title %} Home {% endblock %}</h1>
+{% block title %}Home{% endblock %}
 
 
 {% block content %}
 
-    <div class="back-drop-container">
         
         <img  src="{{ pic1 }}" alt="background picture of woman with mask" class="backdrop-img">
         <div class="title-flex">
@@ -14,12 +13,35 @@
             <div class="title-flex-items description">Tracking, displaying, evaluating, and archiving of the corona infections in every location.</div>
 
             <div class="registration-flex">
-                <div class="reg-items one">VISITOR</div>
-                <div class="reg-items two">PLACE</div>
-                <div class="reg-items three">HOSPITAL</div>
-                <div class="reg-items four">AGENCY</div>
+                <a href="{{ url_for('visitorRegister') }}"><div class="reg-items one">VISITOR</div></a>
+                <a href="{{ url_for('placeRegister') }}"><div class="reg-items two">PLACE</div></a>
+                <a href="{{ url_for('hospitalSignin') }}"><div class="reg-items three">HOSPITAL</div></a>
+                <a href="{{ url_for('agentSignin') }}"><div class="reg-items four">AGENCY</div></a>                
+                
+                
             </div>
 
+        </div>
+
+        <div class="impressum">
+            <p>This website is student lab work and does not necessarily reflect Jacobs University Bremen opinions.
+                 Jacobs University Bremen does not endorse this site, nor is it checked by Jacobs University Bremen regularly, 
+                 nor is it part of the official Jacobs University Bremen web presence. 
+                 For each external link existing on this website, we initially have checked that the target page does not contain contents which is illegal wrt. German jurisdiction. 
+                 However, as we have no influence on such contents, this may change without our notice. Therefore we deny any responsibility for the websites referenced through our external links from here.</p>
+                 <br>
+                 <br>
+                 <br>
+                 <br>
+          <hr>
+          
+          <h2 style="color:white">Contact:</h2> 
+          <br>
+          <h3 style="color:white">Sprint 1</h3>
+          <ul>
+                <li>Diego Zablah: d.zablah@jacobs-university.de</li>
+                <li>Volen Terziev: v.terziev@jacobs-university.de</li>
+          </ul>
         </div>
     
 

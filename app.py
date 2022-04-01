@@ -2,13 +2,14 @@ from flask import Flask, render_template, redirect, session, url_for, request
 from flaskext.mysql import MySQL
 import yaml
 import uuid
+import qrcode
 from flask_selfdoc import Autodoc
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
-
 app.secret_key = os.urandom(16)
-
+app.permanent_session_lifetime = timedelta(days=30)
 
 
 #mysql configuration
@@ -34,7 +35,7 @@ imageFolder = os.path.join('static', 'img')
 app.config['UPLOAD_FOLDER'] = imageFolder
 
 #homepage render 
-@app.route('/')
+@app.route('/index')
 @auto.doc()
 def index():
     backdrop_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'backdrop.jpg')
@@ -59,7 +60,9 @@ def visitorRegister():
     cur = get_cursor()
     if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
         and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
-        
+
+        session.permanent = True
+        first_name_visitor =  request.form['fname']
         name = request.form['fname'] + " " + request.form['lname']
         address = request.form['address'] + ", " + request.form['city']
         email = request.form['email']
@@ -67,11 +70,13 @@ def visitorRegister():
         device_id = uuid.uuid4()
         session["visitor_device_id"] = device_id
 
-        cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
-                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
+        cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number, device_id) \
+                VALUES (%s,%s,%s,%s,%s)' , (name, address, email, phone, device_id))
         mysql.get_db().commit()
         cur.close()
-        return redirect(url_for('visitorHomepage'))
+        
+       
+        return redirect(url_for('visitorHomepage', first_name = first_name_visitor))
     else:
         return render_template('visitor_registration.html')
 
@@ -87,15 +92,25 @@ def placeRegister():
         city: city of visitor
     All fields are required.
     """
+
+    if "place_device_id" in session:
+        return redirect(url_for('placeHomepage'))
+
     cur = get_cursor()
     if request.method == 'POST' and 'name' in request.form and 'address' in request.form \
     and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
+
+        session.permanent = True
+
         name = request.form['name']
         address = request.form['address'] + ", " + request.form['city']
         email = request.form['email']
         phone = request.form['phone']
-        cur.execute('INSERT INTO Places (place_name,address,email,phone_number) \
-                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
+        unique_QR = uuid.uuid4()
+        session["place_device_id"] = unique_QR
+
+        cur.execute('INSERT INTO Places (place_name,address,email,phone_number,QRcode) \
+                VALUES (%s,%s,%s,%s,%s)' , (name, address, email, phone, unique_QR))
         mysql.get_db().commit()
         cur.close()
         return redirect(url_for('placeHomepage'))
@@ -114,9 +129,18 @@ def agentSignin():
     All fields are required.
     Must be a correct combination in the database
     """
+
+    if "agent_device_id" in session:
+        return redirect(url_for('agent_tools'))
+
     error = None
     cur = get_cursor()
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
+        
+        session.permanent = True
+        unique_agent = uuid.uuid4()
+        session["agent_device_id"] = unique_agent
+
         username = request.form['username']
         password = request.form['password']
         cur.execute("SELECT * FROM Agent A WHERE A.username = %s AND A.password = %s", (username, password))
@@ -145,9 +169,18 @@ def hospitalSignin():
     All fields are required.
     Must be a correct combination in the database
     """
+
+    if "hospital_device_id" in session:
+        return redirect(url_for('hospital_tools'))
+
     error = None
     cur = get_cursor()
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
+
+        session.permanent = True
+        unique_hospital = uuid.uuid4()
+        session["hospital_device_id"] = unique_hospital
+
         username = request.form['username']
         password = request.form['password']
         cur.execute("SELECT * FROM Hospital A WHERE A.username = %s AND A.password = %s", (username, password))
@@ -166,19 +199,32 @@ def hospitalSignin():
         return render_template('hospital_signin.html')
 
 # visitor homepage
-@app.route('/visitor-homepage')
+@app.route('/visitor-homepage/<first_name>')
 @auto.doc()
-def visitorHomepage():
+def visitorHomepage(first_name):
     # if the visitor is not in session return to home
     if "visitor_device_id" not in session:
         return redirect('/')
-    return render_template('visitor_homepage.html')
+    return render_template('visitor_homepage.html', first_name = first_name)
 
 # place homepage
 @app.route('/place-homepage')
 @auto.doc()
 def placeHomepage():
-    return render_template('place_homepage.html')
+    if "place_device_id" not in session:
+        return redirect('/')
+
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=15,
+        border=15
+    )
+    data = session["place_device_id"]
+    qr.add_data(data)
+    qr.make(fit=True)
+    qr_img = qr.make_image(fill = 'black', back_color='white')
+    
+    return render_template('place_homepage.html', qr_img = qr_img)
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])
@@ -193,6 +239,10 @@ def agent_tools():
     """agent tools page.
     Implementation pending
     """
+    
+    if "agent_device_id" not in session:
+        return redirect('/')
+
     cur = get_cursor()
     cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
@@ -210,6 +260,10 @@ def hospital_tools():
     """hospital tools page.
     Implementation pending
     """
+
+    if "hospital_device_id" not in session:
+        return redirect('/')
+
     cur = get_cursor()
     cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
     infected_people = cur.fetchall()
@@ -223,6 +277,25 @@ def hospital_tools():
 def docs():
     return auto.html(title='Corona Center API Docs')
 
+@app.route('/visitor-logout')
+def visitorLogout():
+    session.pop("visitor_device_id", None)
+    return redirect('/')
+
+@app.route('/place-logout')
+def placeLogout():
+    session.pop("place_device_id", None)
+    return redirect('/')
+
+@app.route('/agent-logout')
+def agentLogout():
+    session.pop("agent_device_id", None)
+    return redirect('/')
+
+@app.route('/hospital-logout')
+def hospitalLogout():
+    session.pop("hospital_device_id", None)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug = True)

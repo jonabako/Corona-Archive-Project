@@ -1,13 +1,23 @@
 *{
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  scroll-behavior: smooth;
+  font-family: 'Oxygen', sans-serif;
+
+  
 }
 
-body {
-  font-family: serif;
-  background-color: #abcdef;
+title{
+  display: none;
 }
+
+body{
+  background-color: #ffffff;
+  
+}
+
 #registration {
   width: 270px;
   position: absolute;
@@ -21,19 +31,33 @@ body {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-  border-radius:10px;
+  /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(186, 186, 186);
+  /* border-radius:10px; */
   position: relative;
 }
 
 .mainButton{
-  color: black;
+  color: rgb(255, 255, 255);
+  background-color: #333366;
   width: 150px;
   border-radius: 10px;
+  font-weight: 700;
+  font-size: large;
+  border: none;
   padding: 10px;
   margin: 10px 0;
   position: relative;
   left: 25%;
+  transition: all 200ms ease-in-out;
+}
+
+.mainButton:hover{
+  background-color: rgb(93, 93, 184);
+  color: #ffffff;
+ 
 }
 
 
@@ -61,18 +85,10 @@ h3 {
 }
 
 /* Paragraphs & lists */
-p {
-  padding: 2px;
-  margin: 10px 10px;
-}
-
 ul {
   list-style-type: square;
 }
 
-li {
-  margin-bottom: 5px;
-}
 
 /* Top navigation & impressum footer */
 .topnav {
@@ -101,27 +117,22 @@ li {
   width: 100%;
   background-color: #90a0c0;
   font-size: 75%;
-  padding: 4px;
-}
-
-.try{
-  height: 100;
-  width: 100%;
-  background-color: red;
 }
 
 
 
 .back-drop-container{
+  /* height: max-content; */
+  
   position: relative;
 }
 
 
 .backdrop-img{
-  height: 800px;
+  height: max-content;
   width: 100%;
   object-fit:cover;
-
+  margin: 0;
   z-index: -2;
   filter: grayscale(50%);
 
@@ -162,23 +173,19 @@ li {
 
 div[class= "title-flex-items title"]{
   font-size:xx-large;
+  font-weight: 800;
  
 }
 
 div[class= "title-flex-items description"]{
-  font-size: medium; 
+  font-size: medium;
+  font-weight: 100; 
   margin-top: 1em;
   width: 30em;
   word-wrap: normal;
 }
 
 
-.title-flex:hover{
-
-  height: 18em;
-  width: 38em;
- 
-}
 
 .registration-pointer{
   height: 10em;
@@ -197,34 +204,37 @@ div[class= "title-flex-items description"]{
 }
 
 div[class="reg-items one"]{
-  transition: all 200ms ease-in-out;
-}
-
-div[class="reg-items two"]{
   transition: all 300ms ease-in-out;
 }
 
-div[class="reg-items three"]{
+div[class="reg-items two"]{
   transition: all 400ms ease-in-out;
 }
 
-div[class="reg-items four"]{
+div[class="reg-items three"]{
   transition: all 500ms ease-in-out;
 }
 
+div[class="reg-items four"]{
+  transition: all 600ms ease-in-out;
+}
 
+a{
+  text-decoration: none;
+}
 
 .reg-items{
-  height: 3.5em;
+  height: 3em;
   width: 10em;
   text-align: center;
 
 
   padding: 1rem;
-  margin: 0.2rem;
-  background-color: #424286;
-  color: white;
+  margin: 0.3rem;
+  background-color: white;
+  color: #424286;
   font-weight: 800;
+  text-decoration: none;
 
   border-radius: 30px;
 
@@ -245,5 +255,43 @@ div[class="reg-items four"]{
 }
 
 .reg-items:hover{
-  background-color: #6363c2;
+  color: white;
+  background-color: #424286;
+}
+
+.impressum{
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white !important;
+  margin: 0;
+  padding: 1em;
+}
+
+li{
+  margin: 0px;
+  text-indent: 40px;
+  
+  
+}
+
+
+.visitor-flex{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(100, 100, 100, 0.3);
+  margin: 5rem auto auto auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.visitor-flex-items{
+  margin: 2rem 0;
+  
+
+}
+
+button[class="mainButton visitor"]{
+  height: 5em;
+  width: 15rem;
 }
