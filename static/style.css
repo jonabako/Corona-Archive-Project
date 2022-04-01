@@ -1,4 +1,8 @@
-
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: serif;
@@ -100,3 +104,146 @@ li {
   padding: 4px;
 }
 
+.try{
+  height: 100;
+  width: 100%;
+  background-color: red;
+}
+
+
+
+.back-drop-container{
+  position: relative;
+}
+
+
+.backdrop-img{
+  height: 800px;
+  width: 100%;
+  object-fit:cover;
+
+  z-index: -2;
+  filter: grayscale(50%);
+
+  overflow: hidden;
+}
+
+
+
+.title-flex{
+  height: 15em;
+  width: 35em;
+  background-color: rgba(155, 155, 155, 0.3);
+  
+  
+  border-radius: 5px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 15em;
+  margin-left: 5em;
+
+
+  padding: 2rem;
+
+  z-index: 5;
+
+  color: white;
+  box-shadow: -15px 10px 45px black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  transition: all 400ms ease-in-out;
+}
+
+div[class= "title-flex-items title"]{
+  font-size:xx-large;
+ 
+}
+
+div[class= "title-flex-items description"]{
+  font-size: medium; 
+  margin-top: 1em;
+  width: 30em;
+  word-wrap: normal;
+}
+
+
+.title-flex:hover{
+
+  height: 18em;
+  width: 38em;
+ 
+}
+
+.registration-pointer{
+  height: 10em;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+
+
+.registration-flex{
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  transition: all 300ms ease-in-out;
+}
+
+div[class="reg-items one"]{
+  transition: all 200ms ease-in-out;
+}
+
+div[class="reg-items two"]{
+  transition: all 300ms ease-in-out;
+}
+
+div[class="reg-items three"]{
+  transition: all 400ms ease-in-out;
+}
+
+div[class="reg-items four"]{
+  transition: all 500ms ease-in-out;
+}
+
+
+
+.reg-items{
+  height: 3.5em;
+  width: 10em;
+  text-align: center;
+
+
+  padding: 1rem;
+  margin: 0.2rem;
+  background-color: #424286;
+  color: white;
+  font-weight: 800;
+
+  border-radius: 30px;
+
+
+}
+
+
+.title-flex:hover * div[class="reg-items one"],
+.title-flex:hover * div[class="reg-items two"],
+.title-flex:hover * div[class="reg-items three"],
+.title-flex:hover * div[class="reg-items four"] {
+  
+  transform: translateX(11em);
+}
+.title-flex:hover > .registration-flex{
+
+  opacity: 1;
+}
+
+.reg-items:hover{
+  background-color: #6363c2;
+}

@@ -28,11 +28,16 @@ def get_cursor():
     return cursor
 
 
+#image folder
+imageFolder = os.path.join('static', 'img')
+app.config['UPLOAD_FOLDER'] = imageFolder
+
 #homepage render 
 @app.route('/')
 @auto.doc()
 def index():
-    return render_template('index.html')
+    backdrop_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'backdrop.jpg')
+    return render_template('index.html', pic1 = backdrop_picture)
 
 # visitor registration page
 @app.route('/visitor-registration', methods=['POST','GET'])
@@ -87,6 +92,7 @@ def placeRegister():
         return redirect(url_for('placeHomepage'))
     else:
         return render_template('place_registration.html')
+
 
 # agent sign in page
 @app.route('/agent-signin', methods=['POST', 'GET'])
