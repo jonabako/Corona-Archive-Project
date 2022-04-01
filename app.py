@@ -297,5 +297,12 @@ def hospitalLogout():
     session.pop("hospital_device_id", None)
     return redirect('/')
 
+@app.route('/user-search', methods=['POST', 'GET'])
+def UserSearch():
+    pass
+    
+    
+    
+    
 if __name__ == "__main__":
     app.run(debug = True)
