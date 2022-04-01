@@ -19,11 +19,14 @@ body{
 }
 
 #registration {
-  width: 270px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15% auto;
+
   padding: 10px;
 }
 
@@ -31,12 +34,11 @@ body{
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
+  
   outline: none;
   border: none;
   border-bottom: 1px solid rgb(186, 186, 186);
-  /* border-radius:10px; */
-  position: relative;
+
 }
 
 .mainButton{
@@ -49,8 +51,6 @@ body{
   border: none;
   padding: 10px;
   margin: 10px 0;
-  position: relative;
-  left: 25%;
   transition: all 200ms ease-in-out;
 }
 
@@ -185,7 +185,9 @@ div[class= "title-flex-items description"]{
   word-wrap: normal;
 }
 
-
+.registration-title{
+  margin-top: 2em;
+}
 
 .registration-pointer{
   height: 10em;
@@ -261,11 +263,17 @@ a{
 
 .impressum{
   width: 100%;
-  height: 100%;
+  height: fit-content;
   background-color: black;
   color: white !important;
-  margin: 0;
+
   padding: 1em;
+
+  
+  display: block;
+  margin-top: auto;
+
+  /* display: none; */
 }
 
 li{

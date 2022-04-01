@@ -35,7 +35,7 @@ imageFolder = os.path.join('static', 'img')
 app.config['UPLOAD_FOLDER'] = imageFolder
 
 #homepage render 
-@app.route('/index')
+@app.route('/')
 @auto.doc()
 def index():
     backdrop_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'backdrop.jpg')
