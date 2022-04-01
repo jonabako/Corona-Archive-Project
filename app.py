@@ -53,21 +53,24 @@ def visitorRegister():
         city: city of visitor
     All fields are required.
     """
-
+    # check if the visitor already has a saved session
     if "visitor_device_id" in session:
         return redirect(url_for('visitorHomepage'))
 
     cur = get_cursor()
+    # check that all fields are filled
     if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
         and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
 
         session.permanent = True
+
+        # get data from form and put it in database
         first_name_visitor =  request.form['fname']
         name = request.form['fname'] + " " + request.form['lname']
         address = request.form['address'] + ", " + request.form['city']
         email = request.form['email']
         phone = request.form['phone']
-        device_id = uuid.uuid4()
+        device_id = uuid.uuid4()    # generate a unique string
         session["visitor_device_id"] = device_id
 
         cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number, device_id) \
@@ -75,7 +78,6 @@ def visitorRegister():
         mysql.get_db().commit()
         cur.close()
         
-       
         return redirect(url_for('visitorHomepage', first_name = first_name_visitor))
     else:
         return render_template('visitor_registration.html')
@@ -93,20 +95,23 @@ def placeRegister():
     All fields are required.
     """
 
+    # check if the place already has a saved session
     if "place_device_id" in session:
         return redirect(url_for('placeHomepage'))
 
     cur = get_cursor()
+    # check that all fields are filled
     if request.method == 'POST' and 'name' in request.form and 'address' in request.form \
     and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
 
         session.permanent = True
 
+        # get data from form and put it in database
         name = request.form['name']
         address = request.form['address'] + ", " + request.form['city']
         email = request.form['email']
         phone = request.form['phone']
-        unique_QR = uuid.uuid4()
+        unique_QR = uuid.uuid4()        # generate a unique string
         session["place_device_id"] = unique_QR
 
         cur.execute('INSERT INTO Places (place_name,address,email,phone_number,QRcode) \
@@ -130,17 +135,20 @@ def agentSignin():
     Must be a correct combination in the database
     """
 
+    # check if agent has a saved session
     if "agent_device_id" in session:
         return redirect(url_for('agent_tools'))
 
     error = None
     cur = get_cursor()
+    # check that all form fields are filled
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
         
         session.permanent = True
-        unique_agent = uuid.uuid4()
+        unique_agent = uuid.uuid4()     # generate a unique string
         session["agent_device_id"] = unique_agent
 
+        # get data from form and put it in database
         username = request.form['username']
         password = request.form['password']
         cur.execute("SELECT * FROM Agent A WHERE A.username = %s AND A.password = %s", (username, password))
@@ -170,17 +178,20 @@ def hospitalSignin():
     Must be a correct combination in the database
     """
 
+    # check if hospital has a session
     if "hospital_device_id" in session:
         return redirect(url_for('hospital_tools'))
 
     error = None
     cur = get_cursor()
+    # check that all fields are filled
     if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
 
         session.permanent = True
-        unique_hospital = uuid.uuid4()
+        unique_hospital = uuid.uuid4()      # generate a unique string
         session["hospital_device_id"] = unique_hospital
 
+        # get data from form and put it in database
         username = request.form['username']
         password = request.form['password']
         cur.execute("SELECT * FROM Hospital A WHERE A.username = %s AND A.password = %s", (username, password))
@@ -211,9 +222,22 @@ def visitorHomepage(first_name):
 @app.route('/place-homepage')
 @auto.doc()
 def placeHomepage():
+    # if the place is not in session return to home
     if "place_device_id" not in session:
         return redirect('/')
 
+    return render_template('place_homepage.html')
+
+
+#QR PICture folder
+QRimageFolder = os.path.join('static', 'QR')
+app.config['UPLOAD_FOLDER'] = QRimageFolder
+
+# downloads QR to device
+@app.route('/download-QR')
+@auto.doc()
+def downloadQR():
+    # generate unique QR code that carries the place session as data
     qr = qrcode.QRCode(
         version=1,
         box_size=15,
@@ -223,8 +247,14 @@ def placeHomepage():
     qr.add_data(data)
     qr.make(fit=True)
     qr_img = qr.make_image(fill = 'black', back_color='white')
+    # saves image to file
+    qr_img.save("static/QR/PlaceQR.png")
+
     
-    return render_template('place_homepage.html', qr_img = qr_img)
+
+    qr_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'PlaceQR.png')
+    return render_template('place_homepage.html', qr = qr_picture)
+
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])
@@ -240,6 +270,7 @@ def agent_tools():
     Implementation pending
     """
     
+    # if the agent is not in session return to home
     if "agent_device_id" not in session:
         return redirect('/')
 
@@ -261,6 +292,7 @@ def hospital_tools():
     Implementation pending
     """
 
+    # if the hospital is not in session return to home
     if "hospital_device_id" not in session:
         return redirect('/')
 
@@ -277,23 +309,36 @@ def hospital_tools():
 def docs():
     return auto.html(title='Corona Center API Docs')
 
+
 @app.route('/visitor-logout')
 def visitorLogout():
+    """
+        Deletes visitor session and returns to homepage
+    """
     session.pop("visitor_device_id", None)
     return redirect('/')
 
 @app.route('/place-logout')
 def placeLogout():
+    """
+        Deletes place session and returns to homepage
+    """
     session.pop("place_device_id", None)
     return redirect('/')
 
 @app.route('/agent-logout')
 def agentLogout():
+    """
+        Deletes agent session and returns to homepage
+    """
     session.pop("agent_device_id", None)
     return redirect('/')
 
 @app.route('/hospital-logout')
 def hospitalLogout():
+    """
+        Deletes hospital session and returns to homepage
+    """
     session.pop("hospital_device_id", None)
     return redirect('/')
 

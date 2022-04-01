@@ -121,8 +121,7 @@ env.bak/
 venv.bak/
 
 .idea/
-# db yaml
-db.yaml
+
 
 # Spyder project settings
 .spyderproject

@@ -168,6 +168,14 @@ ul {
   align-items: flex-start;
 
   transition: all 400ms ease-in-out;
+
+  animation-name: glow;
+   animation-duration: 5s;
+   animation-timing-function: ease-in-out;
+   animation-delay: 0;
+   animation-fill-mode: linear;
+   animation-iteration-count: 2;
+   animation-play-state: initial;
 }
 
 div[class= "title-flex-items title"]{
@@ -301,4 +309,51 @@ li{
 button[class="mainButton visitor"]{
   height: 5em;
   width: 15rem;
+}
+
+
+.qr-image{
+  height: 100px;
+  width: 100px;
+}
+
+.generate-buttons{
+  display: flex-direction;
+  /* margin:  0 2em; */
+}
+
+
+@keyframes glow{
+
+  0%{
+
+    background-color: rgba(255, 135, 135, 0.89);
+
+  }
+
+  20%{
+
+    background-color: #3b7cff88;
+
+  }
+
+  50%{
+
+    background-color: #47ff568d;
+
+  }
+
+
+  75%{
+
+    background-color: #db7de2;
+
+  }
+
+  100%{
+
+    background-color: #90a0c0;
+
+  }
+
 }

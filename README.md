@@ -100,5 +100,48 @@ $ pip3 install -Iv {nameofpackage==version}
 --------------------------------------------------
 # Sprint Progress Team 2, Qais Qamhia and Vahid Nesro
 
+## Achievements / Changes Implemented 
+ * Created Landing Page, which was non-existent
+* Implemented a hover option UI to give the website and extra punch. (Hover on the Homepage Bar to Ses)
+* Improved Mis-matched forms (some had unnecesary input fields, others lacked fields such as password)
+* Implemented Permanent Sessions to store each registered users data for 30 days -- this was neccesary as the project design does not save password
+* Implemented custom animation on hero title
+* Implemented QR Generation
+* Restructured database according to project design -- fixing inconsistencies between SQL tables and project design (added fields to Visitors/Places and removed password from Visitors)
+* Created Separte Registration pages for Visitor, Place, Hospital and Agency
+* Implemented Logout buttons to clear registered user session
+* Improved Commenting and Adding Much More of our own
+* Improved Navbar UI to make it look more attractve and professional
+* Redid Requirements.txt because it was not correct
+* Improved Installation Steps -- previous one was not complete
+* Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
 
+## Prerequisites
+* [Mysql](https://dev.mysql.com/downloads/mysql/)
+* Flask
+
+## Installation Guide
+```bash
+# Clone the repo and cd into directory.
+git clone https://github.com/Magrawal17/SE-Sprint01-Team26
+cd SE-Sprint01-Team26
+
+# Create virtual environment
+$ virtualenv env
+
+# Start virtual environment
+$ source env/bin/activate
+
+# Install requirements.txt
+$ pip3 install -r "requirements.txt"
+
+# Login to MySQL
+$ mysql -u {ROOT/YOUR PERSONAL USERNAME} -p
+
+# Import Database, User and Table from tables.sql by running this command in MYSQL command line to create required database.
+mysql> source sql/tables.sql
+mysql> exit
+
+# Run python server
+$ python3 app.py

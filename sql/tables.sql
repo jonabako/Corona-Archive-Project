@@ -62,3 +62,7 @@ CREATE TABLE `Hospital` (
 
 INSERT INTO `Agent` (`username`, `password`) VALUES ('agent1','arM54764jd?');
 INSERT INTO `Hospital` (`username`, `password`) VALUES ('hospital1', 'wersdc?44');
+
+-- CREATING USER
+CREATE USER 'seteam26'@'localhost' IDENTIFIED BY 'oi8CFtOc';
+GRANT ALL PRIVILEGES ON seteam26 . * TO 'seteam26'@'localhost';
