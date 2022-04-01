@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, session, url_for, request
 from flaskext.mysql import MySQL
 import yaml
+import uuid
 from flask_selfdoc import Autodoc
 import os
 
@@ -51,21 +52,28 @@ def visitorRegister():
         city: city of visitor
     All fields are required.
     """
+
+    if "visitor_device_id" in session:
+        return redirect(url_for('visitorHomepage'))
+
     cur = get_cursor()
-    if request.method == 'POST':
-        if 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
+    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
         and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
-            name = request.form['fname'] + " " + request.form['lname']
-            address = request.form['address'] + ", " + request.form['city']
-            email = request.form['email']
-            phone = request.form['phone']
-            cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
-                    VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
-            mysql.get_db().commit()
-            cur.close()
-            return redirect(url_for('visitorHomepage'))
-        else:
-            return render_template('visitor_registration.html')
+        
+        name = request.form['fname'] + " " + request.form['lname']
+        address = request.form['address'] + ", " + request.form['city']
+        email = request.form['email']
+        phone = request.form['phone']
+        device_id = uuid.uuid4()
+        session["visitor_device_id"] = device_id
+
+        cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
+                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
+        mysql.get_db().commit()
+        cur.close()
+        return redirect(url_for('visitorHomepage'))
+    else:
+        return render_template('visitor_registration.html')
 
 # place registration page
 @app.route('/place-registration', methods=['POST','GET'])
@@ -161,6 +169,9 @@ def hospitalSignin():
 @app.route('/visitor-homepage')
 @auto.doc()
 def visitorHomepage():
+    # if the visitor is not in session return to home
+    if "visitor_device_id" not in session:
+        return redirect('/')
     return render_template('visitor_homepage.html')
 
 # place homepage
