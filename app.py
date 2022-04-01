@@ -47,19 +47,20 @@ def visitorRegister():
     All fields are required.
     """
     cur = get_cursor()
-    if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
-    and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
-        name = request.form['fname'] + " " + request.form['lname']
-        address = request.form['address'] + ", " + request.form['city']
-        email = request.form['email']
-        phone = request.form['phone']
-        cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
-                VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
-        mysql.get_db().commit()
-        cur.close()
-        return redirect(url_for('visitorHomepage'))
-    else:
-        return render_template('visitor_registration.html')
+    if request.method == 'POST':
+        if 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
+        and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
+            name = request.form['fname'] + " " + request.form['lname']
+            address = request.form['address'] + ", " + request.form['city']
+            email = request.form['email']
+            phone = request.form['phone']
+            cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number) \
+                    VALUES (%s,%s,%s,%s)' , (name, address, email, phone))
+            mysql.get_db().commit()
+            cur.close()
+            return redirect(url_for('visitorHomepage'))
+        else:
+            return render_template('visitor_registration.html')
 
 # place registration page
 @app.route('/place-registration', methods=['POST','GET'])
