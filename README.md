@@ -116,6 +116,7 @@ $ pip3 install -Iv {nameofpackage==version}
 * Improved Installation Steps -- previous one was not complete
 * Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
+# Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
 
 ## Prerequisites
 * [Mysql](https://dev.mysql.com/downloads/mysql/)
