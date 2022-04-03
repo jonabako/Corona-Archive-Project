@@ -117,6 +117,13 @@ $ pip3 install -Iv {nameofpackage==version}
 * Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
+- [] Option to download the generated QR code
+- [] Ability for hospitals to mark visitors as infected
+- [] Ability for Agent to do read and write operations in the database
+ - [] Read and write for Hospital (Hospital registration)
+ - [] Read and write for Visitors 
+ - [] Read and write for Places
+- [] Ability to scan a QR code / input its code
 
 ## Prerequisites
 * [Mysql](https://dev.mysql.com/downloads/mysql/)

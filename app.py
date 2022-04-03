@@ -255,6 +255,13 @@ def downloadQR():
     qr_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'PlaceQR.png')
     return render_template('place_homepage.html', qr = qr_picture)
 
+# page to scan a QR code
+@app.route('/scan-QR')
+@auto.doc()
+def scanQR():
+    # scanning the QR code using javascript
+    return render_template('visitor_QR_scan.html')
+
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])
