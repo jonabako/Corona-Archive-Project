@@ -118,12 +118,15 @@ $ pip3 install -Iv {nameofpackage==version}
 
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
 - [] Option to download the generated QR code
-- [] Ability for hospitals to mark visitors as infected
+- [] Ability to scan a QR code / input its code
+- [] CSS improvements
+- [] Ability for hospitals to mark visitors as infected 
 - [] Ability for Agent to do read and write operations in the database (SQL Editor and/or forms)
  - [] Read and write for Hospital (Hospital registration)
  - [] Read and write for Visitors 
  - [] Read and write for Places
-- [] Ability to scan a QR code / input its code
+- [] Integrating an SQL editor 
+
 
 ## Prerequisites
 * [Mysql](https://dev.mysql.com/downloads/mysql/)
