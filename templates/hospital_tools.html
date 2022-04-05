@@ -2,6 +2,17 @@
 
 {% block content %}
     <h1>{% block title %} Hospital tools {% endblock %}</h1>
+
+    <div class="formwrap">
+        <form id = "registration" action="" method="post">
+            <h2>Mark people as infected</h2>
+            <input type="text" class="visitor-registration" placeholder="First Name" name="fname" value="{{request.form.fname }}" required> <br>
+            <input type="text" class="visitor-registration" placeholder="Last Name" name="lname" value="{{request.form.lname }}" required> <br>
+            <input class="mainButton" type="submit" value="SUBMIT"><br>
+        </form>
+
+    </div>
+
     <div class="formwrap">
         <form action="" method="POST">
             <h2> Search infected people </h2>
@@ -39,6 +50,8 @@
             <input type="submit">
         </form>
     </div>
+
+
 
     <form action="{{ url_for('hospitalLogout')}}">
         <button class="mainButton">Logout</button>

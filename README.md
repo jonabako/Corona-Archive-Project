@@ -121,12 +121,13 @@ $ pip3 install -Iv {nameofpackage==version}
 - [] Ability to scan a QR code / input its code
 - [] CSS improvements
 - [] Ability for hospitals to mark visitors as infected 
-- [] Ability for Agent to register hospitals
+- [x] Ability for Agent to register hospitals
 - [] Ability for Agent to do read and write operations in the database (SQL Editor and/or forms)
  - [] Read and write for Hospital (Hospital registration)
  - [] Read and write for Visitors 
  - [] Read and write for Places
 - [] Integrating an SQL editor 
+- [] SQL error handling
 
 
 ## Prerequisites

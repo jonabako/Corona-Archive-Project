@@ -320,7 +320,6 @@ def hospital_tools():
     """hospital tools page.
     Implementation pending
     """
-
     # if the hospital is not in session return to home
     if "hospital_device_id" not in session:
         return redirect('/')
