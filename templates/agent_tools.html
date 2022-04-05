@@ -2,7 +2,8 @@
 
 {% block content %}
     <h1>{% block title %} Agent tools {% endblock %}</h1>
-    <form action="/get_visitor_information.php" method="POST">
+    <h3>{{ message }}</h3>
+    <form id = "registration" action="/get_visitor_information.php" method="POST">
         <h2> Search infected people </h2>
         <!-- dropdown populated with all infected visitors -->
         <select name="visitors">
@@ -15,7 +16,7 @@
         <input type="submit">
     </form>
 
-    <form action="/get_places_date_range.php" method="POST">
+    <form id = "registration" action="/get_places_date_range.php" method="POST">
         <h2> Search infected places </h2>
         <!-- dropdown populated with all infected places-->
         <!-- perform query in the action page to find -->
@@ -34,6 +35,13 @@
         <input type="date" id="todate" name="todate" min="2019-11-17" max="2023-12-30"> <br>
         <input type="time" id="totime" name="totime"> <br>
         <input type="submit">
+    </form>
+
+    <form id = "registration" action="{{ url_for('hospital_register') }}" method="post">
+        <h2> Register a hospital </h2>
+        <input type="text" class="visitor-registration" placeholder="Username" name="username" value="{{request.form.username }}" required> <br>
+        <input type="password" class="visitor-registration" placeholder="Password" name="password" value="{{request.form.password }}" required> <br>
+        <input class="mainButton" type="submit" value="REGISTER"><br>
     </form>
 
     <form action="{{ url_for('agentLogout')}}">

@@ -276,7 +276,6 @@ def agent_tools():
     """agent tools page.
     Implementation pending
     """
-    
     # if the agent is not in session return to home
     if "agent_device_id" not in session:
         return redirect('/')
@@ -290,6 +289,29 @@ def agent_tools():
     infected_places = cur.fetchall()
     return render_template('agent_tools.html',
         infected_people = infected_people, infected_places = infected_places)
+
+# hospital registration route, only accessible by Agents
+@app.route('/hospital_register', methods=['POST','GET'])
+@auto.doc()
+def hospital_register():
+    """hospital registration route, will handle post requests coming
+       from the registration form for agents  
+    """
+    # if the agent is not in session return to home
+    if "agent_device_id" not in session:
+        return redirect('/')
+
+    cur = get_cursor()
+    # handling post request
+    if request.method == 'POST' and 'username' in request.form  and 'password' in request.form:
+        username = request.form["username"]
+        password = request.form["password"]
+
+        cur.execute('INSERT INTO Hospital (username, password) \
+                VALUES (%s,%s)' , (username, password))
+        mysql.get_db().commit()
+        cur.close()
+        return render_template('agent_tools.html', message=f"successfully registered {username}")
 
 #hospital tools page
 @app.route('/hospital_tools',methods=['POST','GET'])

@@ -60,8 +60,8 @@ CREATE TABLE `Hospital` (
   PRIMARY KEY (`hospital_id`)
 );
 
-INSERT INTO `Agent` (`username`, `password`) VALUES ('agent1','arM54764jd?');
-INSERT INTO `Hospital` (`username`, `password`) VALUES ('hospital1', 'wersdc?44');
+INSERT INTO `Agent` (`username`, `password`) VALUES ('testname','testpassword');
+INSERT INTO `Hospital` (`username`, `password`) VALUES ('testname', 'testpassword');
 
 -- CREATING USER
 CREATE USER 'seteam26'@'localhost' IDENTIFIED BY 'oi8CFtOc';
