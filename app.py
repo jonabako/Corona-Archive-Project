@@ -325,7 +325,7 @@ def hospital_tools():
         return redirect('/')
 
     cur = get_cursor()
-    cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected')
+    cur.execute('SELECT citizen_id, visitor_name FROM Visitor WHERE infected = 1')
     infected_people = cur.fetchall()
     # Struggling to figure out the query for places with infected visitors
     cur.execute('SELECT place_id, place_name FROM Places')
@@ -355,8 +355,8 @@ def hospital_DB_status_change():
             cur.execute(command)
             mysql.get_db().commit()
             # display confirmation message
-            message = f"{name.title()} was successfully set as " + ("infected." if status else "not infected.")
-        # if not an error message is displayedd
+            message = f"{name.title()} was successfully set as " + ("infected." if int(status) else "not infected.")
+        # if not an error message is displayed
         else:
             message = f"The is no user named {name.title()}"
         cur.close()
