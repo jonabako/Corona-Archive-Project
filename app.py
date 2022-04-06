@@ -332,6 +332,37 @@ def hospital_tools():
     infected_places = cur.fetchall()
     return render_template('hospital_tools.html', infected_people = infected_people, infected_places = infected_places)
 
+# route to mark people as infected
+@app.route('/hospital_DB_status_change', methods=['GET', 'POST'])
+@auto.doc()
+def hospital_DB_status_change():
+    if "hospital_device_id" not in session:
+        return redirect('/')
+    
+    if request.method == "POST":
+        # Obtain data from request object
+        name = request.form['fname'] + " " + request.form['lname']
+        status = request.form['status']
+
+        # check to see if the person exists in the database
+        cur = get_cursor()
+        command = f"SELECT * FROM Visitor WHERE visitor_name LIKE '{name}'"
+        cur.execute(command)
+        visitors = cur.fetchall()
+        # if yes then update the status
+        if len(visitors) > 0:
+            command = f"UPDATE Visitor SET infected = {status} WHERE visitor_name LIKE '{name}'"
+            cur.execute(command)
+            mysql.get_db().commit()
+            # display confirmation message
+            message = f"{name.title()} was successfully set as " + ("infected." if status else "not infected.")
+        # if not an error message is displayedd
+        else:
+            message = f"The is no user named {name.title()}"
+        cur.close()
+
+        return render_template('hospital_tools.html', message=message), 200
+
 # Add /docs at the end of the standard link for the documentation
 @app.route('/docs')
 def docs():
