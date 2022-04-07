@@ -290,6 +290,22 @@ def agent_tools():
     return render_template('agent_tools.html',
         infected_people = infected_people, infected_places = infected_places)
 
+# searching page for visitors, allows searching using 
+# visitor name, address, phone number and so on, all in one field
+@app.route('/agent_search_visitors', methods=['POST','GET'])
+@auto.doc()
+def agent_search_visitors():
+    """Page for searching / displaying visitors  
+    """
+    if "agent_device_id" not in session:
+        return redirect('/')
+    if request.method == "GET":
+        cur = get_cursor()
+        cur.execute(f"""SELECT citizen_id, visitor_name, address, email, 
+                               phone_number, device_id, infected FROM Visitor;""")
+        people = cur.fetchall()    
+        return render_template('agent_search_visitors.html',data=people), 200
+
 # hospital registration route, only accessible by Agents
 @app.route('/hospital_register', methods=['POST','GET'])
 @auto.doc()

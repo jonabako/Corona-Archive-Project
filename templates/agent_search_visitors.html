@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form id = "registration" action="{{ url_for('hospital_DB_status_change')}}" method="post">
+        <h2>Search visitors</h2>
+        <p>Search bar is flexible, it covers all fields</p>
+        <input type="text" class="visitor-registration" placeholder="Type an entry" name="entry" value="{{request.form.entry}}" required> <br>
+        <input class="mainButton" type="submit" value="SUBMIT"><br>
+    </form>
+    <table> 
+        <thead> 
+        <tr> 
+            <th>Citizen ID</th> 
+            <th>Full Name</th>
+            <th>Address</th> 
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Device ID</th>
+            <th>Infected</th>
+        </tr> 
+        </thead> 
+        <tbody> 
+            {% for row in data %}  
+                <tr> 
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                </tr> 
+            {% endfor %} 
+        </tbody> 
+    </table>
+
+{% endblock %}
