@@ -3,22 +3,10 @@
 {% block content %}
     <h1>{% block title %} Hospital tools {% endblock %}</h1>
 
-    <div class="formwrap">
-        <form id = "registration" action="{{ url_for('hospital_DB_status_change')}}" method="post">
-            <h2>Mark people as infected / not infected</h2>
-            <input type="text" class="visitor-registration" placeholder="First Name" name="fname" value="{{request.form.fname }}" required> <br>
-            <input type="text" class="visitor-registration" placeholder="Last Name" name="lname" value="{{request.form.lname }}" required> <br>
-            <!-- radio buttons input to choose to mark -->
-            <input type="radio" name="status" value="1" checked>
-                <label>Infected</label><br>
-            <input type="radio" name="status" value="0">
-                <label>Not Infected</label><br>
-            <input class="mainButton" type="submit" value="SUBMIT"><br>
-            <h3>{{ message }}</h3>
-        </form>
-
-    </div>
-
+    <form action="{{ url_for('hospital_DB_status_change')}}">
+        <button class="mainButton">Change infection status</button>
+    </form>
+    
     <div class="formwrap">
         <form action="" method="POST">
             <h2> Search infected people </h2>

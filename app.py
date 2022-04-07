@@ -338,7 +338,9 @@ def hospital_tools():
 def hospital_DB_status_change():
     if "hospital_device_id" not in session:
         return redirect('/')
-    
+    if request.method == "GET":
+        return render_template('hospital_DB_status_change.html', message=""), 200
+
     if request.method == "POST":
         # Obtain data from request object
         name = request.form['fname'] + " " + request.form['lname']
@@ -361,7 +363,7 @@ def hospital_DB_status_change():
             message = f"The is no user named {name.title()}"
         cur.close()
 
-        return render_template('hospital_tools.html', message=message), 200
+        return render_template('hospital_DB_status_change.html', message=message), 200
 
 # Add /docs at the end of the standard link for the documentation
 @app.route('/docs')
