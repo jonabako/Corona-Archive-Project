@@ -292,6 +292,7 @@ def agent_tools():
 
 # searching page for visitors, allows searching using 
 # visitor name, address, phone number and so on, all in one field
+# only accessible by agents
 @app.route('/agent_search_visitors', methods=['POST','GET'])
 @auto.doc()
 def agent_search_visitors():
@@ -316,6 +317,31 @@ def agent_search_visitors():
                               phone_number LIKE '%{entry}%';""")
         people = cur.fetchall()
         return render_template('agent_search_visitors.html',data=people), 200
+
+# searching page for visitors, allows searching using 
+# visitor name, address, phone number and so on, all in one field
+# only accessible by agents
+@app.route('/agent_search_hospitals', methods=['POST','GET'])
+@auto.doc()
+def agent_search_hospitals():
+    """Page for searching / displaying hospitals  
+    """
+    if "agent_device_id" not in session:
+        return redirect('/')
+    if request.method == "GET":
+        cur = get_cursor()
+        cur.execute(f"""SELECT hospital_id, username FROM Hospital;""")
+        hospitals = cur.fetchall()    
+        return render_template('agent_search_hospitals.html',data=hospitals), 200
+    # POST request for searching
+    if request.method == "POST":
+        entry = request.form['entry']
+        cur = get_cursor()
+        cur.execute(f"""SELECT hospital_id, username FROM Hospital
+                        WHERE hospital_id LIKE '%{entry}%' OR username LIKE '%{entry}%';""")
+        hospitals = cur.fetchall()
+        return render_template('agent_search_hospitals.html',data=hospitals), 200
+
 
 # hospital registration route, only accessible by Agents
 @app.route('/hospital_register', methods=['POST','GET'])
