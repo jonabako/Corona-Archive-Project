@@ -5,7 +5,8 @@
     <form id = "registration" action="{{ url_for('agent_search_hospitals')}}" method="post">
         <h2>Search Hospitals</h2>
         <p>Search bar is flexible, it covers all fields</p>
-        <input type="text" class="visitor-registration" placeholder="Search" name="entry" value="{{request.form.entry}}" required> <br>
+        <p>To see all entries, leave the search bar empty and click on submit</p>
+        <input type="text" class="visitor-registration" placeholder="Search" name="entry" value="{{request.form.entry}}"> <br>
         <input class="mainButton" type="submit" value="SUBMIT"><br>
     </form>
     <table> 
