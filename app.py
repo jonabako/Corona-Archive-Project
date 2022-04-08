@@ -305,6 +305,17 @@ def agent_search_visitors():
                                phone_number, device_id, infected FROM Visitor;""")
         people = cur.fetchall()    
         return render_template('agent_search_visitors.html',data=people), 200
+    # POST request for searching
+    if request.method == "POST":
+        entry = request.form['entry']
+        cur = get_cursor()
+        cur.execute(f"""SELECT citizen_id, visitor_name, address, email, 
+                               phone_number, device_id, infected FROM Visitor
+                        WHERE citizen_id LIKE '%{entry}%' OR visitor_name LIKE '%{entry}%' OR
+                              address LIKE '%{entry}%' OR email LIKE '%{entry}%' OR 
+                              phone_number LIKE '%{entry}%';""")
+        people = cur.fetchall()
+        return render_template('agent_search_visitors.html',data=people), 200
 
 # hospital registration route, only accessible by Agents
 @app.route('/hospital_register', methods=['POST','GET'])
