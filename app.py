@@ -292,20 +292,22 @@ def agent_tools():
 
 # searching page for visitors, allows searching using 
 # visitor name, address, phone number and so on, all in one field
-# only accessible by agents
-@app.route('/agent_search_visitors', methods=['POST','GET'])
+# only accessible by agents and hospitals
+@app.route('/search_visitors', methods=['POST','GET'])
 @auto.doc()
-def agent_search_visitors():
+def search_visitors():
     """Page for searching / displaying visitors  
     """
-    if "agent_device_id" not in session:
+    if ("agent_device_id" not in session) and ("hospital_device_id" not in session):  
         return redirect('/')
+
+
     if request.method == "GET":
         cur = get_cursor()
         cur.execute(f"""SELECT citizen_id, visitor_name, address, email, 
                                phone_number, device_id, infected FROM Visitor;""")
         people = cur.fetchall()    
-        return render_template('agent_search_visitors.html',data=people), 200
+        return render_template('search_visitors.html',data=people), 200
     # POST request for searching
     if request.method == "POST":
         entry = request.form['entry']
@@ -316,7 +318,7 @@ def agent_search_visitors():
                               address LIKE '%{entry}%' OR email LIKE '%{entry}%' OR 
                               phone_number LIKE '%{entry}%';""")
         people = cur.fetchall()
-        return render_template('agent_search_visitors.html',data=people), 200
+        return render_template('search_visitors.html',data=people), 200
 
 # searching page for visitors, allows searching using 
 # visitor name, address, phone number and so on, all in one field
