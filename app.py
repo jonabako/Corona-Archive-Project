@@ -298,6 +298,7 @@ def agent_tools():
 def search_visitors():
     """Page for searching / displaying visitors  
     """
+    # accessible by both agents and hospitals
     if ("agent_device_id" not in session) and ("hospital_device_id" not in session):  
         return redirect('/')
 
@@ -330,6 +331,7 @@ def agent_search_hospitals():
     """
     if "agent_device_id" not in session:
         return redirect('/')
+    # At first, all the data is displayed
     if request.method == "GET":
         cur = get_cursor()
         cur.execute(f"""SELECT hospital_id, username FROM Hospital;""")
@@ -344,6 +346,27 @@ def agent_search_hospitals():
         hospitals = cur.fetchall()
         return render_template('agent_search_hospitals.html',data=hospitals), 200
 
+# agent route for search places
+@app.route('/agent_search_places', methods=['POST', 'GET'])
+def agent_search_places():
+    if "agent_device_id" not in session:
+        return redirect('/')
+    # At first, all the data is displayed
+    if request.method == "GET":
+        cur = get_cursor()
+        cur.execute(f"""SELECT place_id, place_name, address, email, phone_number, QRcode FROM Places;""")
+        places = cur.fetchall()    
+        return render_template('agent_search_places.html',data=places), 200
+    # POST request for searching
+    if request.method == "POST":
+        entry = request.form['entry']
+        cur = get_cursor()
+        cur.execute(f"""SELECT place_id, place_name, address, email, phone_number, QRcode FROM Places
+                        WHERE place_id LIKE '%{entry}%' OR place_name LIKE '%{entry}%' OR
+                              address LIKE '%{entry}%' OR email LIKE '%{entry}%' OR
+                              phone_number LIKE '%{entry}%';""")
+        places = cur.fetchall()
+        return render_template('agent_search_places.html',data=places), 200
 
 # hospital registration route, only accessible by Agents
 @app.route('/hospital_register', methods=['POST','GET'])

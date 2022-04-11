@@ -24,6 +24,10 @@
         <button class="mainButton">Go to Hospital Search</button>
     </form>
 
+    <form action="{{ url_for('agent_search_places')}}">
+        <button class="mainButton">Go to Place Search</button>
+    </form>
+
     <form id = "registration" action="/get_places_date_range.php" method="POST">
         <h2> Search infected places </h2>
         <!-- dropdown populated with all infected places-->

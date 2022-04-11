@@ -125,7 +125,7 @@ $ pip3 install -Iv {nameofpackage==version}
 - [x] Ability for Agent to register hospitals
 - [x] Ability for Agent to see the list of hospitals (and search)
 - [x] Ability for Agent to see all visitors (and search)
-- [] Ability for Agent to see registered places (and search)
+- [x] Ability for Agent to see registered places (and search)
 
 - [] SQL error handling
 
