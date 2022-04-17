@@ -6,6 +6,9 @@ import qrcode
 from flask_selfdoc import Autodoc
 import os
 from datetime import timedelta
+import cv2
+
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(16)
@@ -249,9 +252,6 @@ def downloadQR():
     qr_img = qr.make_image(fill = 'black', back_color='white')
     # saves image to file
     qr_img.save("static/QR/PlaceQR.png")
-
-    
-
     qr_picture = os.path.join(app.config['UPLOAD_FOLDER'], 'PlaceQR.png')
     return render_template('place_homepage.html', qr = qr_picture)
 
@@ -259,8 +259,27 @@ def downloadQR():
 @app.route('/scan-QR')
 @auto.doc()
 def scanQR():
+    # initalize the cam
+    cap = cv2.VideoCapture(0)
+    # initialize the cv2 QRCode detector
+    detector = cv2.QRCodeDetector()
+    while True:
+        _, img = cap.read()
+        # detect and decode
+        data, bbox, _ = detector.detectAndDecode(img)
+        # check if there is a QRCode in the image
+        if data:
+            a=data
+            break
+        # display the result
+        cv2.imshow("QRCODEscanner", img)    
+        if cv2.waitKey(1) == ord("q"):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
     # scanning the QR code using javascript
-    return render_template('visitor_QR_scan.html')
+    return render_template('visitor_QR_scan.html', qrcode =  str(a))
 
 
 # impressum page
