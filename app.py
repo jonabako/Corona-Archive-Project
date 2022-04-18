@@ -5,7 +5,7 @@ import uuid
 import qrcode
 from flask_selfdoc import Autodoc
 import os
-from datetime import timedelta
+from datetime import datetime, timedelta
 import cv2
 
 
@@ -79,6 +79,11 @@ def visitorRegister():
         cur.execute('INSERT INTO Visitor (visitor_name,address,email,phone_number, device_id) \
                 VALUES (%s,%s,%s,%s,%s)' , (name, address, email, phone, device_id))
         mysql.get_db().commit()
+
+        # putting the citizen id into the session, needed for QR code scanning
+        cur.execute(f"SELECT citizen_id FROM Visitor WHERE device_id = '{device_id}'")
+        session["citizen_id"] = cur.fetchone()[0]
+
         cur.close()
         
         return redirect(url_for('visitorHomepage', first_name = first_name_visitor))
@@ -259,6 +264,8 @@ def downloadQR():
 @app.route('/scan-QR')
 @auto.doc()
 def scanQR():
+    if "visitor_device_id" not in session:
+        return redirect('/')
     # initalize the cam
     cap = cv2.VideoCapture(0)
     # initialize the cv2 QRCode detector
@@ -279,7 +286,41 @@ def scanQR():
     cap.release()
     cv2.destroyAllWindows()
     # scanning the QR code using javascript
-    return render_template('visitor_QR_scan.html', qrcode =  str(a))
+
+    # fetching the place mentioned in the QR code
+    qr_code = str(a)
+    cur = get_cursor()
+    cur.execute(f"""SELECT place_id, place_name FROM Places WHERE QRcode = '{qr_code}';""")
+    place = cur.fetchone()
+    if(place is not None): # checking if there is a hit
+        # get all info needed to make an entry in VisitorToPlaces
+        # get info about the place 
+        place_id = place[0]
+        place_name = place[1]
+        # info about visitor (citizen_id, device_id)
+        device_id = session["visitor_device_id"]
+        citizen_id = session["citizen_id"]
+        # get current timestamp
+        dt = datetime.now()
+        entry_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S") # converting to sql supported format
+        # add entry in VisitorToPlaces
+        cur = get_cursor()
+        cur.execute(f"""INSERT INTO VisitorToPlaces (QRcode, device_id, entry_timestamp, exit_timestamp, citizen_id, place_id)
+                        VALUES ('{qr_code}','{device_id}','{entry_timestamp}',NULL,{citizen_id},{place_id})""")
+        mysql.get_db().commit()
+        cur.close()
+
+        message = f"Connected to: {place_name}"
+
+        # log out
+    else:
+        message = "Invalid QR Code, no place is linked to it."
+    
+    # adding an entry in the visitor-place relation table
+
+
+
+    return render_template('visitor_QR_scan.html', message =  message)
 
 
 # impressum page

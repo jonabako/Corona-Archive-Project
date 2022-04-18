@@ -3,6 +3,8 @@ IF NOT EXISTS seteam26;
 
 USE `seteam26`;
 
+DROP TABLE IF EXISTS `VisitorToPlaces`;
+
 DROP TABLE IF EXISTS `Visitor`;
 
 CREATE TABLE `Visitor` (
@@ -28,13 +30,13 @@ CREATE TABLE `Places` (
   PRIMARY KEY (`place_id`)
 );
 
-DROP TABLE IF EXISTS `VisitorToPlaces`;
+
 
 CREATE TABLE `VisitorToPlaces` (
   `QRcode` varchar(150) NOT NULL,
   `device_id` varchar(50) NOT NULL,
   `entry_timestamp` timestamp NOT NULL,
-  `exit_timestamp` timestamp NOT NULL,
+  `exit_timestamp` timestamp,
   `citizen_id` int NOT NULL,
   `place_id` int NOT NULL,
   PRIMARY KEY (`QRcode`),
@@ -60,8 +62,11 @@ CREATE TABLE `Hospital` (
   PRIMARY KEY (`hospital_id`)
 );
 
+-- For testing
 INSERT INTO `Agent` (`username`, `password`) VALUES ('testname','testpassword');
 INSERT INTO `Hospital` (`username`, `password`) VALUES ('testname', 'testpassword');
+
+INSERT INTO `Places` (`place_name`, `address`, `email`, `phone_number`, `QRcode`) VALUES ('test place','test address N200', 'email@email.com', '1111111111111','test-qr-code');
 
 -- CREATING USER
 CREATE USER 'seteam26'@'localhost' IDENTIFIED BY 'oi8CFtOc';

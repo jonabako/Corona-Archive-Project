@@ -117,8 +117,12 @@ $ pip3 install -Iv {nameofpackage==version}
 * Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
-- [] Option to download the generated QR code
-- [] Ability to scan a QR code / input its code
+- [x] Option to download the generated QR code
+- [x] Ability to scan a QR code (pops up in another window)
+ - [] linking it to the database
+ - [] make testcase to show that it works
+ - [] implement exit_timestamp
+ - [] add timer
 - [] CSS improvements
 - [x] Ability for hospitals to mark visitors as infected 
 - [x] Ability for Hospital to see list of visitors (and search)
@@ -126,7 +130,8 @@ $ pip3 install -Iv {nameofpackage==version}
 - [x] Ability for Agent to see the list of hospitals (and search)
 - [x] Ability for Agent to see all visitors (and search)
 - [x] Ability for Agent to see registered places (and search)
-
+- [] testing for all of the above
+- [] added deployement procedure for windows
 - [] SQL error handling
 
 
