@@ -138,10 +138,10 @@ $ pip3 install -Iv {nameofpackage==version}
 
 - [x] Option to download the generated QR code
 - [x] Ability to scan a QR code (pops up in another window)
-- [x] linking it to the database
-- [] make testcase to show that it works
-- [x] implement exit_timestamp
-- [] add timer
+        - [x] linking it to the database
+        - [] make testcase to show that it works
+        - [x] implement exit_timestamp
+        - [] add timer
 - [] CSS improvements
 - [x] Ability for hospitals to mark visitors as infected
 - [x] Ability for Hospital to see list of visitors (and search)
@@ -156,7 +156,7 @@ $ pip3 install -Iv {nameofpackage==version}
 - [] add our details at the end of page
 - [] navigate to error page on getting error. for eg wrong email pass instead of displaying error in bottom
 - [] css in hospital section should be adopte similar to agent
-
+- [] fixed infected people drop-down for agent tools
 ## Prerequisites
 
 - [Mysql](https://dev.mysql.com/downloads/mysql/)
