@@ -264,6 +264,8 @@ def downloadQR():
 @app.route('/scan-QR')
 @auto.doc()
 def scanQR():
+    ''' Handles QR code scanning and visitor check-in into a place
+    '''
     if "visitor_device_id" not in session:
         return redirect('/')
     # initalize the cam
@@ -305,23 +307,56 @@ def scanQR():
         entry_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S") # converting to sql supported format
         # add entry in VisitorToPlaces
         cur = get_cursor()
-        cur.execute(f"""INSERT INTO VisitorToPlaces (QRcode, device_id, entry_timestamp, exit_timestamp, citizen_id, place_id)
+        #exit time stamp will be NULL until the user checks out of the place
+        cur.execute(f"""INSERT INTO VisitorToPlaces  (QRcode, device_id, entry_timestamp, exit_timestamp, citizen_id, place_id)
                         VALUES ('{qr_code}','{device_id}','{entry_timestamp}',NULL,{citizen_id},{place_id})""")
         mysql.get_db().commit()
         cur.close()
 
-        message = f"Connected to: {place_name}"
+        # creating additionnal session elements (used for timer and log-out)
+        session['current_place_id'] = place_id # to update exit timestamp later on
+        session['entry_timestamp'] = entry_timestamp # to configure timer relative to it
 
-        # log out
+        # user feedback
+        message = f"Connected to: {place_name}"
+        logout = 1 # wether or not to show the log-out button and timer
+
     else:
         message = "Invalid QR Code, no place is linked to it."
-    
-    # adding an entry in the visitor-place relation table
+        logout = 0
 
+    return render_template('visitor_QR_scan.html', message=message, logout=logout)
 
+# visitor check-out route
+@app.route('/visitor_check_out',methods=['POST','GET'])
+@auto.doc()
+def visitor_check_out():
+    '''checks out visitor from place by updating entry with exit_timestamp
+       ends visitor session
+    '''
+    if "visitor_device_id" not in session:
+        return redirect('/')
 
-    return render_template('visitor_QR_scan.html', message =  message)
+    # get current timestamp
+    dt = datetime.now()
+    exit_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S") # converting to sql supported format
+    # updating the entry in VisitorToPlaces in order to reflect exit_timestamp
+    cur = get_cursor()
+    cur.execute(f"""
+                    UPDATE VisitorToPlaces
+                    SET exit_timestamp = '{exit_timestamp}'
+                    WHERE device_id = '{session["visitor_device_id"]}' AND
+                          entry_timestamp = '{session["entry_timestamp"]}' AND
+                          place_id = {session["current_place_id"]};  
+                """)
+    mysql.get_db().commit()
+    cur.close()
 
+    # deleting current visitor session
+    session.pop("entry_timestamp", None)
+    session.pop("current_place_id", None)
+    session.pop("visitor_device_id", None)
+    return redirect('/')
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])

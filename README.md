@@ -119,9 +119,9 @@ $ pip3 install -Iv {nameofpackage==version}
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
 - [x] Option to download the generated QR code
 - [x] Ability to scan a QR code (pops up in another window)
- - [] linking it to the database
+ - [x] linking it to the database
  - [] make testcase to show that it works
- - [] implement exit_timestamp
+ - [x] implement exit_timestamp
  - [] add timer
 - [] CSS improvements
 - [x] Ability for hospitals to mark visitors as infected 
