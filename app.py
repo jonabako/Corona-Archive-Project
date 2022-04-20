@@ -61,6 +61,10 @@ def visitorRegister():
         return redirect(url_for('visitorHomepage'))
 
     cur = get_cursor()
+
+    if request.method == 'GET':
+        return render_template('visitor_registration.html'), 200
+
     # check that all fields are filled
     if request.method == 'POST' and 'fname' in request.form and 'lname' in request.form and 'address' in request.form \
         and 'city' in request.form and 'email' in request.form and 'phone' in request.form:
@@ -86,9 +90,9 @@ def visitorRegister():
 
         cur.close()
         
-        return redirect(url_for('visitorHomepage', first_name = first_name_visitor))
+        return redirect(url_for('visitorHomepage', first_name = first_name_visitor)), 200
     else:
-        return render_template('visitor_registration.html')
+        return render_template('visitor_registration.html'), 400
 
 # place registration page
 @app.route('/place-registration', methods=['POST','GET'])
@@ -105,8 +109,10 @@ def placeRegister():
 
     # check if the place already has a saved session
     if "place_device_id" in session:
-        return redirect(url_for('placeHomepage'))
+        return redirect(url_for('placeHomepage')), 200
 
+    if request.method == "GET":
+        return render_template('place_registration.html'), 200
     cur = get_cursor()
     # check that all fields are filled
     if request.method == 'POST' and 'name' in request.form and 'address' in request.form \
@@ -126,9 +132,9 @@ def placeRegister():
                 VALUES (%s,%s,%s,%s,%s)' , (name, address, email, phone, unique_QR))
         mysql.get_db().commit()
         cur.close()
-        return redirect(url_for('placeHomepage'))
+        return redirect(url_for('placeHomepage')), 200
     else:
-        return render_template('place_registration.html')
+        return render_template('place_registration.html'), 400
 
 
 # agent sign in page
@@ -325,7 +331,7 @@ def scanQR():
         message = "Invalid QR Code, no place is linked to it."
         logout = 0
 
-    return render_template('visitor_QR_scan.html', message=message, logout=logout)
+    return render_template('visitor_QR_scan.html', message=message, logout=logout) , 200
 
 # visitor check-out route
 @app.route('/visitor_check_out',methods=['POST','GET'])
@@ -383,7 +389,7 @@ def agent_tools():
     cur.execute('SELECT place_id, place_name FROM Places')
     infected_places = cur.fetchall()
     return render_template('agent_tools.html',
-        infected_people = infected_people, infected_places = infected_places)
+        infected_people = infected_people, infected_places = infected_places) , 200
 
 # searching page for visitors, allows searching using 
 # visitor name, address, phone number and so on, all in one field
@@ -415,6 +421,42 @@ def search_visitors():
                               phone_number LIKE '%{entry}%';""")
         people = cur.fetchall()
         return render_template('search_visitors.html',data=people), 200
+
+# route to display info of infected people and places visited by that person
+@app.route('/agent_visitor_info', methods=['POST','GET'])
+@auto.doc()
+def agent_visitor_info():
+    """display visitor info and places the visitor has been to
+    """
+    # if the agent is not in session return to home
+    if "agent_device_id" not in session:
+        return redirect('/')
+
+    # handling post request
+    if request.method == "POST":
+
+        citizen_id = request.form["visitors"]
+        # running a query to get the info of the selected visitor
+        cur = get_cursor()
+        cur.execute(f"""SELECT citizen_id, visitor_name, address, email, 
+                               phone_number, device_id, infected 
+                        FROM Visitor
+                        WHERE citizen_id = {citizen_id};""")
+        visitor_info = cur.fetchone()
+
+        # running a query to get the places the visitor visited along with entry and exit timestamps
+
+        cur = get_cursor()
+        cur.execute(f""" SELECT P.place_id, P.place_name, VP.entry_timestamp, VP.exit_timestamp, P.address, P.email, P.phone_number
+                         FROM Places P 
+                         INNER JOIN VisitorToPlaces VP ON P.place_id = VP.place_id
+                         WHERE VP.citizen_id = {citizen_id}; 
+                    """)
+        places_visited = cur.fetchall()
+    
+    return render_template('agent_visitor_info.html', visitor_info = visitor_info , places_visited=places_visited), 200
+
+
 
 # searching page for visitors, allows searching using 
 # visitor name, address, phone number and so on, all in one field
@@ -484,7 +526,7 @@ def hospital_register():
                 VALUES (%s,%s)' , (username, password))
         mysql.get_db().commit()
         cur.close()
-        return render_template('agent_tools.html', message=f"successfully registered {username}")
+        return render_template('agent_tools.html', message=f"successfully registered {username}"), 200
 
 #hospital tools page
 @app.route('/hospital_tools',methods=['POST','GET'])

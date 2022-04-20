@@ -135,7 +135,7 @@ $ pip3 install -Iv {nameofpackage==version}
 - Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
-
+- [] Fixed testing of previous group, there were too many failed tests, mainly due to not separating GET and POST requests in the code (test.py)
 - [x] Option to download the generated QR code
 - [x] Ability to scan a QR code (pops up in another window)
         - [x] linking it to the database
@@ -143,20 +143,22 @@ $ pip3 install -Iv {nameofpackage==version}
         - [x] implement exit_timestamp
         - [] add timer
 - [] CSS improvements
-- [x] Ability for hospitals to mark visitors as infected
+- [x] Ability for Agent to view infected people dropdown and see their info along with which places they visited and at what time
+- [x] Ability for Hospitals to mark visitors as infected
 - [x] Ability for Hospital to see list of visitors (and search)
 - [x] Ability for Agent to register hospitals
 - [x] Ability for Agent to see the list of hospitals (and search)
 - [x] Ability for Agent to see all visitors (and search)
 - [x] Ability for Agent to see registered places (and search)
+
+- [] Ability for hospital to view infected people dropdown and see their info
 - [] testing for all of the above
+
 - [] added deployement procedure for windows
-- [] SQL error handling
-- [] broken UI of search result in agent's and hospital's page
-- [] add our details at the end of page
+
 - [] navigate to error page on getting error. for eg wrong email pass instead of displaying error in bottom
-- [] css in hospital section should be adopte similar to agent
-- [] fixed infected people drop-down for agent tools
+
+
 ## Prerequisites
 
 - [Mysql](https://dev.mysql.com/downloads/mysql/)

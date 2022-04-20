@@ -33,13 +33,14 @@ CREATE TABLE `Places` (
 
 
 CREATE TABLE `VisitorToPlaces` (
+  `entry_id` int NOT NULL AUTO_INCREMENT,
   `QRcode` varchar(150) NOT NULL,
   `device_id` varchar(50) NOT NULL,
   `entry_timestamp` timestamp NOT NULL,
   `exit_timestamp` timestamp,
   `citizen_id` int NOT NULL,
   `place_id` int NOT NULL,
-  PRIMARY KEY (`QRcode`),
+  PRIMARY KEY (`entry_id`),
   FOREIGN KEY (`citizen_id`) REFERENCES Visitor(`citizen_id`),
   FOREIGN KEY (`place_id`) REFERENCES Places(`place_id`)
 

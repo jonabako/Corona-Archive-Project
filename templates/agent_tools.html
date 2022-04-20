@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Agent tools {% endblock %}</h1>
 <h3>{{ message }}</h3>
-<form id="registration" action="/get_visitor_information.php" method="POST">
+<form id="registration" action="{{ url_for('agent_visitor_info') }}" method="POST">
   <h2>Search infected people</h2>
   <!-- dropdown populated with all infected visitors -->
   <select name="visitors">

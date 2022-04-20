@@ -10,20 +10,16 @@
         <input class="mainButton" type="submit" value="SUBMIT"><br>
     </form>
     <table> 
-        <thead> 
         <tr> 
             <th>hospital_id</th> 
             <th>username</th>
         </tr> 
-        </thead> 
-        <tbody> 
             {% for row in data %}  
                 <tr> 
                     <td>{{row[0]}}</td>
                     <td>{{row[1]}}</td>
                 </tr> 
-            {% endfor %} 
-        </tbody> 
+            {% endfor %}  
     </table>
 
 {% endblock %}

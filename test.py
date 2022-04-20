@@ -1,4 +1,5 @@
 import unittest
+from urllib import response
 
 from app import app
 from flask import json
@@ -42,7 +43,7 @@ class CoronaTest(unittest.TestCase):
             b'<form action="/visitor-registration" method="post">', response.data)
 
     def test_agentHome_page(self):
-        response = self.app.get('/agent-homepage', follow_redirects=True)
+        response = self.app.get('/visitor-homepage/<first_name>', follow_redirects=True)
         self.assertIn(
             b'<form action="agent-signin" method="post">', response.data)
 
@@ -112,6 +113,12 @@ class CoronaTest(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_hospitalRegister_work(self):
+        response = self.app.post(
+            '/hospital_register', data=dict(username="newhospital", password="newpassword")
+        )
+
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == "__main__":
     unittest.main()
