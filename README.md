@@ -168,11 +168,7 @@ $ python3 app.py
 ```
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
 - [x] Option to download the generated QR code
-- [x] Ability to scan a QR code (pops up in another window)
-        - [x] linking it to the database
-        - [] make testcase to show that it works, see below for detailed instruction on how to scan into places.
-        - [x] implement exit_timestamp
-        - [] add timer
+- [x] Ability to scan a QR code (pops up in another window) to check into a place and also check out. (see below for detailed instructions)
 - [x] CSS improvements
 - [x] Ability for Agent to view infected people dropdown and see their info along with which places they visited and at what time
 - [x] Ability for Hospitals to mark visitors as infected
@@ -216,3 +212,15 @@ mysql> exit
 # Run python server
 > flask run
 ```
+
+## QR code scanning intructions
+### Step 1, generate a QR code on your phone
+- On your phone, go to https://www.qr-code-generator.com or any other QR code generator
+- as text, enter the following `test-qr-code` (case sensitive), there already exists an entry in the Place table which has the previous qr code.
+- Click on GENERATE QR CODE
+### Step 2, run the web app and register as a Visitor
+- After registering, click on SCAN QR CODE
+- a pop up window will appear, bring your phone with the previously generated QR code infront of the webcam and it should scan it.
+- You should see `connected to: test place`
+### Step 3, checking out
+- Simply click on LOGOUT
