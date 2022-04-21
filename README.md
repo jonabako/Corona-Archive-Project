@@ -134,26 +134,6 @@ $ pip3 install -Iv {nameofpackage==version}
 - Improved Installation Steps -- previous one was not complete
 - Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
-# Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
-- [x] Option to download the generated QR code
-- [x] Ability to scan a QR code (pops up in another window)
-        - [x] linking it to the database
-        - [] make testcase to show that it works, see below for detailed instruction on how to scan into places.
-        - [x] implement exit_timestamp
-        - [] add timer
-- [] CSS improvements
-- [x] Ability for Agent to view infected people dropdown and see their info along with which places they visited and at what time
-- [x] Ability for Hospitals to mark visitors as infected
-- [x] Ability for Hospital to see list of visitors (and search)
-- [x] Ability for Agent to register hospitals
-- [x] Ability for Agent to see the list of hospitals (and search)
-- [x] Ability for Agent to see all visitors (and search)
-- [x] Ability for Agent to see registered places (and search)
-- [x] Testing (see test_group3.py)
-- [x] added deployement procedure for windows, see below
-
-- [] navigate to error page on getting error. for eg wrong email pass instead of displaying error in bottom
-
 
 ## Prerequisites
 
@@ -186,6 +166,30 @@ mysql> exit
 # Run python server
 $ python3 app.py
 ```
+# Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
+- [x] Option to download the generated QR code
+- [x] Ability to scan a QR code (pops up in another window)
+        - [x] linking it to the database
+        - [] make testcase to show that it works, see below for detailed instruction on how to scan into places.
+        - [x] implement exit_timestamp
+        - [] add timer
+- [x] CSS improvements
+- [x] Ability for Agent to view infected people dropdown and see their info along with which places they visited and at what time
+- [x] Ability for Hospitals to mark visitors as infected
+- [x] Ability for Hospital to see list of visitors (and search)
+- [x] Ability for Agent to register hospitals
+- [x] Ability for Agent to see the list of hospitals (and search)
+- [x] Ability for Agent to see all visitors (and search)
+- [x] Ability for Agent to see registered places (and search)
+- [x] Testing (see test_group3.py)
+- [x] added deployement procedure for windows, see below
+
+- [] navigate to error page on getting error. for eg wrong email pass instead of displaying error in bottom
+
+## Prerequisites
+
+- [Mysql](https://dev.mysql.com/downloads/mysql/)
+- Flask
 
 ## Installation Guide for Windows 
 ```powershell
