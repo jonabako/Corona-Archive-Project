@@ -135,11 +135,10 @@ $ pip3 install -Iv {nameofpackage==version}
 - Automated MySQl user creation to simplify installation -- this was assumed in previous sprint which made installation a pain
 
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
-- [] Fixed testing of previous group, there were too many failed tests, mainly due to not separating GET and POST requests in the code (test.py)
 - [x] Option to download the generated QR code
 - [x] Ability to scan a QR code (pops up in another window)
         - [x] linking it to the database
-        - [] make testcase to show that it works
+        - [] make testcase to show that it works, see below for detailed instruction on how to scan into places.
         - [x] implement exit_timestamp
         - [] add timer
 - [] CSS improvements
@@ -150,11 +149,8 @@ $ pip3 install -Iv {nameofpackage==version}
 - [x] Ability for Agent to see the list of hospitals (and search)
 - [x] Ability for Agent to see all visitors (and search)
 - [x] Ability for Agent to see registered places (and search)
-
-- [] Ability for hospital to view infected people dropdown and see their info
-- [] testing for all of the above
-
-- [] added deployement procedure for windows
+- [x] Testing (see test_group3.py)
+- [x] added deployement procedure for windows, see below
 
 - [] navigate to error page on getting error. for eg wrong email pass instead of displaying error in bottom
 
@@ -164,7 +160,7 @@ $ pip3 install -Iv {nameofpackage==version}
 - [Mysql](https://dev.mysql.com/downloads/mysql/)
 - Flask
 
-## Installation Guide
+## Installation Guide for Linux
 
 ```bash
 # Clone the repo and cd into directory.
@@ -189,4 +185,30 @@ mysql> exit
 
 # Run python server
 $ python3 app.py
+```
+
+## Installation Guide for Windows 
+```powershell
+# Clone the repo and cd into directory.
+> git clone https://github.com/Magrawal17/SE-Sprint01-Team26
+> cd SE-Sprint01-Team26
+
+# Create virtual environment
+> virtualenv env
+
+# Start virtual environment
+> .\env\Scripts\activate
+
+# Install requirements.txt
+> pip3 install -r "requirements.txt"
+
+# Login to MySQL
+> mysql -u {ROOT/YOUR PERSONAL USERNAME} -p
+
+# Import Database, User and Table from tables.sql by running this command in MYSQL command line to create required database.
+mysql> source sql\tables.sql
+mysql> exit
+
+# Run python server
+> flask run
 ```

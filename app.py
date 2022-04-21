@@ -341,7 +341,7 @@ def visitor_check_out():
        ends visitor session
     '''
     if "visitor_device_id" not in session:
-        return redirect('/')
+        return redirect('/'), 200
 
     # get current timestamp
     dt = datetime.now()
@@ -362,7 +362,7 @@ def visitor_check_out():
     session.pop("entry_timestamp", None)
     session.pop("current_place_id", None)
     session.pop("visitor_device_id", None)
-    return redirect('/')
+    return redirect('/'), 200
 
 # impressum page
 @app.route('/impressum',methods=['POST','GET'])
@@ -430,7 +430,7 @@ def agent_visitor_info():
     """
     # if the agent is not in session return to home
     if "agent_device_id" not in session:
-        return redirect('/')
+        return redirect('/'), 200
 
     # handling post request
     if request.method == "POST":
@@ -571,14 +571,14 @@ def hospital_DB_status_change():
             command = f"UPDATE Visitor SET infected = {status} WHERE visitor_name LIKE '{name}'"
             cur.execute(command)
             mysql.get_db().commit()
+            cur.close()
             # display confirmation message
-            message = f"{name.title()} was successfully set as " + ("infected." if int(status) else "not infected.")
+            return render_template('hospital_DB_status_change.html', message=f"{name.title()} was successfully set as " + ("infected." if int(status) else "not infected.")), 200
         # if not an error message is displayed
         else:
-            message = f"The is no user named {name.title()}"
-        cur.close()
+            return render_template('hospital_DB_status_change.html', message=f"The is no user named {name.title()}"), 400
 
-        return render_template('hospital_DB_status_change.html', message=message), 200
+        
 
 # Add /docs at the end of the standard link for the documentation
 @app.route('/docs')
