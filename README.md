@@ -264,4 +264,6 @@ mysql> exit
 # Clone the repo.
 git clone https://github.com/Magrawal17/se-04-team-26
 
+...
+
 ```
