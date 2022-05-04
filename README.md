@@ -227,7 +227,7 @@ mysql> exit
 
 ---
 
-# SE-Sprint04-Team26
+# se-04-team-26
 
 # Contributors
 * Jona Bako
