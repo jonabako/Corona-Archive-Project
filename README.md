@@ -229,11 +229,11 @@ mysql> exit
 
 # SE Sprint-04 Team-26
 
-# Contributors
+## Contributors
 * Jona Bako
 * Zineb Laouzi
 
-## Sprint 3 - Achievements
+## Sprint 4 - Achievements
 
 - [x] ...
 
