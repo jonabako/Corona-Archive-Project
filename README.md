@@ -224,3 +224,40 @@ mysql> exit
 - You should see `connected to: test place`
 ### Step 3, checking out
 - Simply click on LOGOUT
+
+# SE-Sprint04-Team26
+
+# Contributors
+* Jona Bako
+* Zineb Laouzi
+
+## Sprint 3 - Achievements
+
+- [x] 
+
+- [ ] 
+
+- [ ] 
+
+- [ ] 
+
+- [ ] 
+
+- [ ] 
+
+- [ ] ... 
+
+- [ ] Added testcases for frontend and backend.
+
+## Built with
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>Python</li>
+  <li>MySQL</li>
+</ul>
+
+## Installation Guide for Linux / Ubuntu Subsystem for Windows
+```
+
+```
