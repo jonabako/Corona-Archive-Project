@@ -225,6 +225,8 @@ mysql> exit
 ### Step 3, checking out
 - Simply click on LOGOUT
 
+---
+
 # SE-Sprint04-Team26
 
 # Contributors
