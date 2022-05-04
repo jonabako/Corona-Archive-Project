@@ -235,21 +235,21 @@ mysql> exit
 
 ## Sprint 3 - Achievements
 
+- [x] ...
+
 - [x] 
 
-- [ ] 
+- [x] 
 
-- [ ] 
+- [x] 
 
-- [ ] 
+- [x] 
 
-- [ ] 
+- [x] 
 
-- [ ] 
+- [x] 
 
-- [ ] ... 
-
-- [ ] Added testcases for frontend and backend.
+- [x] Added testcases for frontend and backend.
 
 ## Built with
 <ul>
@@ -261,5 +261,7 @@ mysql> exit
 
 ## Installation Guide for Linux / Ubuntu Subsystem for Windows
 ```
+# Clone the repo.
+git clone https://github.com/Magrawal17/se-04-team-26
 
 ```
