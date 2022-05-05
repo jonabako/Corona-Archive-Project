@@ -237,7 +237,7 @@ mysql> exit
 
 - [x] Populated sql database with buffer data (separate file inside sql folder).
 
-- [ ] Fixed frontend inconsistencies (mention fixes...).
+- [ ] Fixed frontend inconsistencies (mention fixes i.e. positions of page elements, tables etc...).
 
 - [ ] Changed the footer of the Landing page (Contact us etc…) - too repetitive and space-consuming.
 
@@ -245,7 +245,11 @@ mysql> exit
 
 - [ ] Simplified login proccess by avoiding redirecting page (after logging in, in redirected page we had to click a link to move on to the user page.)
 
-- [ ] Solved bug after Visitor Login - the Scanner Code opened separately as a computer Camera, not closing until the running code is stopped.
+- [ ] Solved bug upon successful Visitor Login - the Scanner Code opened separately as a computer camera, not closing until the running code was stopped.
+ 
+- [ ] Added timer feature after Visitor scans QR code until they press Leave.
+ 
+- [ ] Removed redudant feature in Hospital page - Search infected people in the main page not working (useless)
 
 - [ ] ...
 
