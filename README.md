@@ -235,9 +235,9 @@ mysql> exit
 
 ## Sprint 4 - Achievements
 
-- [x] ...
+- [ ] Populated mysql database with buffer data (separate file inside sql folder).
 
-- [ ] ...
+- [ ] Fixed frontend inconsistencies (mention fixes...)
 
 - [ ] ...
 
