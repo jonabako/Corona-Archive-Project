@@ -235,7 +235,7 @@ mysql> exit
 
 ## Sprint 4 - Achievements
 
-- [ ] Populated mysql database with buffer data (separate file inside sql folder).
+- [ ] Populated sql database with buffer data (separate file inside sql folder).
 
 - [ ] Fixed frontend inconsistencies (mention fixes...)
 
@@ -258,6 +258,10 @@ mysql> exit
   <li>Python</li>
   <li>MySQL</li>
 </ul>
+
+## Prerequisites
+- MySQL
+- Flask
 
 ## Installation Guide for Linux / Ubuntu Subsystem for Windows
 ```
