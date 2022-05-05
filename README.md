@@ -243,9 +243,9 @@ mysql> exit
 
 - [ ] Replaced the navigation bar tabs with information pages (Home, About, Contact Us) to avoid the repetition of User login/register pages.
 
-- [ ] ...
+- [ ] Simplified login proccess by avoiding redirecting page (after logging in, in redirected page we had to click a link to move on to the user page.)
 
-- [ ] ...
+- [ ] Solved bug after Visitor Login - the Scanner Code opened separately as a computer Camera, not closing until the running code is stopped.
 
 - [ ] ...
 
