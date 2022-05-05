@@ -249,7 +249,7 @@ mysql> exit
 
 - [ ] ...
 
-- [ ] Added testcases for frontend and backend.
+- [ ] Added NEW testcases for sprint4.
 
 ## Built with
 <ul>
