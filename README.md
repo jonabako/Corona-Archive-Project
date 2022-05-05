@@ -237,11 +237,11 @@ mysql> exit
 
 - [x] Populated sql database with buffer data (separate file inside sql folder).
 
-- [ ] Fixed frontend inconsistencies (mention fixes...)
+- [ ] Fixed frontend inconsistencies (mention fixes...).
 
-- [ ] ...
+- [ ] Changed the footer of the Landing page (Contact us etc…) - too repetitive and space-consuming.
 
-- [ ] ...
+- [ ] Replaced the navigation bar tabs with information pages (Home, About, Contact Us) to avoid the repetition of User login/register pages.
 
 - [ ] ...
 
