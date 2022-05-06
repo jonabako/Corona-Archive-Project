@@ -263,7 +263,7 @@ mysql> exit
   <li>MySQL</li>
 </ul>
 
-## Installation Guide for Linux / Ubuntu Subsystem for Windows
+## Installation Guide for Linux
 ```bash
 # Clone the repo
 git clone https://github.com/Magrawal17/se-04-team-26
@@ -300,4 +300,43 @@ $ python3 app.py
 
 # Run tests
 $ python3 tests/test_group4.py
+```
+
+## Installation Guide for Linux
+```powershell
+# Clone the repo
+> git clone https://github.com/Magrawal17/se-04-team-26
+
+# Enter the directory
+> se-04-team-26
+
+# Create virtual environment
+> virtualenv env
+
+# Start virtual environment
+> .\env\Scripts\activate
+
+# Install requirements.txt
+> pip3 install -r "requirements.txt"
+
+# Open db.yaml and enter database credentials (root/username and password)
+> nano db.yaml
+
+# Login to MySQL
+mysql> mysql -u {ROOT/YOUR PERSONAL USERNAME} -p
+
+# Import Database, User and Table from createtables.sql
+mysql> source sql/createtables.sql
+
+# Populate database with data from insertdata.sql
+mysql> source sql/insertdata.sql
+
+# Leave mysql command prompt
+mysql> exit
+
+# Run python server
+> flask run
+
+# Run tests
+> python3 tests/test_group4.py
 ```
