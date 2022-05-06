@@ -1,4 +1,4 @@
-        # SE-Sprint01-Team26
+# SE-Sprint01-Team26
 
 #### We ask the following be considered when grading:
 
