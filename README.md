@@ -300,4 +300,5 @@ $ python3 app.py
 
 # Run tests
 $ python3 tests/test_group4.py
-...
+```
+
