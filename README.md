@@ -265,8 +265,11 @@ mysql> exit
 
 ## Installation Guide for Linux / Ubuntu Subsystem for Windows
 ```
-# Clone the repo.
+# Clone the repo
 git clone https://github.com/Magrawal17/se-04-team-26
+
+# Enter the directory
+cd se-04-team-26
 
 # Create virtual environment
 $ virtualenv env
