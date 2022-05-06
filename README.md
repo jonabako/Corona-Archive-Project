@@ -166,6 +166,9 @@ mysql> exit
 # Run python server
 $ python3 app.py
 ```
+
+---
+
 # Sprint Progress Team 3, Ilyas Benyamna and Ujjwal Khadka
 - [x] Option to download the generated QR code
 - [x] Ability to scan a QR code (pops up in another window) to check into a place and also check out. (see below for detailed instructions)
@@ -227,15 +230,11 @@ mysql> exit
 
 ---
 
-# SE Sprint-04 Team-26
+# Sprint Progress Team 4, Jona Bako and Zineb Laouzi
 
-## Contributors
-* Jona Bako
-* Zineb Laouzi
+## Achievements / Improvements
 
-## Sprint 4 - Achievements
-
-- [x] Populated sql database with buffer data (separate file inside sql folder).
+- [ ] Populated sql database with buffer data (separate file inside sql folder).
 
 - [ ] Fixed frontend inconsistencies (mention fixes i.e. positions of page elements, tables etc...).
 
@@ -260,18 +259,44 @@ mysql> exit
   <li>HTML</li>
   <li>CSS</li>
   <li>Python</li>
+  <li>Flask</li>
   <li>MySQL</li>
 </ul>
-
-## Prerequisites
-- MySQL
-- Flask
 
 ## Installation Guide for Linux / Ubuntu Subsystem for Windows
 ```
 # Clone the repo.
 git clone https://github.com/Magrawal17/se-04-team-26
 
+# Create virtual environment
+$ virtualenv env
+
+# Start virtual environment
+$ source env/bin/activate
+
+# Install requirements.txt
+$ pip3 install -r "requirements.txt"
+
+# Open db.yaml and enter database credentials (root/username and password)
+$ nano db.yaml
+
+# Login to MySQL
+$ mysql -u {ROOT/YOUR PERSONAL USERNAME} -p
+
+# Import Database, User and Table from createtables.sql
+mysql> source sql/createtables.sql
+
+# Populate database with data from insertdata.sql
+mysql> source sql/insertdata.sql
+
+# Leave mysql command prompt
+mysql> exit
+
+# Run python server
+$ python3 app.py
+
+# Run tests
+$ python3 tests/test_group4.py
 ...
 
 ```
