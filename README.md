@@ -264,7 +264,7 @@ mysql> exit
 </ul>
 
 ## Installation Guide for Linux / Ubuntu Subsystem for Windows
-```
+```bash
 # Clone the repo
 git clone https://github.com/Magrawal17/se-04-team-26
 
