@@ -108,15 +108,13 @@ bcrypt_secret: "BAD_SECRET_KEY"
 
 ## Installation Guide
 ```
-# Clone the repo
-git clone https://github.com/Magrawal17/se-04-team-26
+# Clone the repo and enter the directory
+git clone https://github.com/jonabako/se-04-team-26
+cd se-04-team-26
 ```
 
 - Linux
 ```bash
-# Enter the directory
-$ cd se-04-team-26
-
 # Create virtual environment
 $ virtualenv env
 
@@ -150,9 +148,6 @@ $ python3 app.py
 
 - Windows
 ```powershell
-# Enter the directory
-> cd se-04-team-26
-
 # Create virtual environment
 > virtualenv env
 

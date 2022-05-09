@@ -213,7 +213,7 @@ def searchCitizen():
     command = ""
     # Filter the information if a POST request is made
     if request.method == 'POST' and request.form['id'] != "invalid":
-        command = f"""SELECT citizen_id, visitor_name, city, address, phone_number, email
+        command = f"""SELECT citizen_id, visitor_name, city, address, phone_number, email, infected
                     FROM Visitor WHERE citizen_id = {request.form['id']}"""
     else:
         command = f"""SELECT citizen_id, visitor_name, city, address, phone_number, email, infected
@@ -235,7 +235,7 @@ def searchPlace():
     # Filter the information if a POST request is made
     if request.method == 'GET':
         # query for the places infected visitors have visited in a period of time
-        command = """SELECT place_name, place_id FROM PlaceOwner, VisitorToPlace, Visitor
+        command = """SELECT place_name, place_id, FROM PlaceOwner, VisitorToPlace, Visitor
                     WHERE Visitor.device_id = VisitorToPlace.device_id AND
                         PlaceOwner.QRcode = VisitorToPlace.QRcode"""
     elif request.method == 'POST':
@@ -243,7 +243,7 @@ def searchPlace():
         to_time = request.form['to']
         # query for selecting the information of a place
         command = f"""SELECT * FROM PlaceOwner
-                    WHERE PlaceOwner.QRcode = SELECT QRcode FROM VisitorToPlace WHERE entry_time >= '{from_time}' AND exit_time <= '{to_time}')"""
+                    WHERE PlaceOwner.QRcode = (SELECT QRcode FROM VisitorToPlace WHERE entry_time >= '{from_time}' AND exit_time <= '{to_time}')"""
     cur.execute(command)
     result = cur.fetchall()
     return render_template('agent-place-search.html', data = result)
