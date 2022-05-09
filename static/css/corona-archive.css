@@ -349,3 +349,8 @@ form[id="add-hospital"] {
 body {
   overflow-x: hidden;
 }
+
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}

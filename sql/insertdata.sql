@@ -53,3 +53,10 @@ insert into Hospital (username, password) values ('tdeniseau6', 'R7opnRExutD');
 insert into Hospital (username, password) values ('lyarnold7', 'ECwrrBT');
 insert into Hospital (username, password) values ('sharmon8', 'SMsKq5RfXo');
 insert into Hospital (username, password) values ('nnoir9', '8mtr14A2P');
+
+
+insert into VisitorToPlace (QRcode, device_id, entry_time, exit_time) values ('b25bb662-5616-4430-bce5-67a8892be7f1', '704a5080-ee10-4e9b-844e-b7aca73df667', '2022-03-15 18:13:11', '2022-03-15 20:13:19');
+insert into VisitorToPlace (QRcode, device_id, entry_time, exit_time) values ('8e095cf6-d284-47e7-908b-34a4603b30a0', '6dad2eeb-d48f-454d-a961-e883d46278f0', '2022-04-02 11:16:15', '2022-04-02 14:16:14');
+insert into VisitorToPlace (QRcode, device_id, entry_time, exit_time) values ('055dec7f-2437-4440-b99f-d39d45680d19', 'd9726e67-7fba-4b6a-99c2-55a8235ea19e', '2022-01-26 12:07:31', '2022-01-26 13:30:11');
+insert into VisitorToPlace (QRcode, device_id, entry_time, exit_time) values ('4151be1f-db2b-490a-90c5-b8a98539a55d', '1cc188e4-8775-43dc-90b1-ed646a8f655f', '2022-01-03 09:16:15', '2022-01-03 15:26:02');
+insert into VisitorToPlace (QRcode, device_id, entry_time, exit_time) values ('8e095cf6-d284-47e7-908b-34a4603b30a0', 'ba723f54-72a4-463f-8324-748ecbdc3316', '2022-03-15 23:13:11', '2022-03-16 02:11:50');
