@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block logout %}
+<form class="logout-container" action="/logout">
+  <button class="nav-item" type="submit">LOGOUT</button>
+</form>
+{% endblock %}
+{% block head %}
+<title>Add Hospital</title>
+{% endblock%} {% block body %}
+<form id="add-hospital" action="/agent-add-hospital" method="POST">
+  <div class="cont cont-owner">
+    <div class="form hospital-sign-in">
+      <h2>Add new hospital</h2>
+      <br />
+      <label>
+        <span>Username</span>
+        <input type="text" name="username" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" />
+      </label>
+      <br />
+      <button class="hospital-search-button" type="submit" class="submit">
+        ADD
+      </button>
+      <div class="warning">{{ message }}</div>
+    </div>
+  </div>
+</form>
+{% endblock %}

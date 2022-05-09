@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block logout %}
+<form class="logout-container" action="/logout">
+  <button class="nav-item" type="submit">LOGOUT</button>
+</form>
+{% endblock %}
+{% block head%}
+<title>Agent Home</title>
+{% endblock %} {% block body %}
+
+<div class="welcome">
+  <h1>Hello Agent</h1>
+  <br />
+</div>
+
+<div class="cont cont-home">
+  <!-- Menu to the different actions -->
+  <div class="agent-action-list">
+    <a href="agent-visitor-search" class="agent-action-item"
+      >Search by visitor</a
+    >
+    <a href="agent-place-search" class="agent-action-item">Search by place</a>
+    <a href="agent-add-hospital" class="agent-action-item">Add new hospital</a>
+  </div>
+</div>
+{% endblock %}

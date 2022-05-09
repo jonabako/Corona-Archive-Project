@@ -1,34 +1,129 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Home{% endblock %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Corona Archive Homepage</title>
+    <meta name="description" />
+    <link rel="stylesheet" href="static/css/default.css" id="theme-color" />
+  </head>
+  <body>
+    <img class="background-img" src="static/images/backdrop.jpg" alt="" />
 
-
-{% block content %}
-
-        
-        <img  src="static\img\backdrop.jpg" alt="background picture of woman with mask" class="backdrop-img">
-        <div class="title-flex">
-           
-            <div class="title-flex-items title">Corona Archive</div>
-            <div class="title-flex-items description">Tracking, displaying, evaluating, and archiving of the corona infections in every location.
-            </div>
-            <div class="registration-flex">
-                <a href="{{ url_for('visitorRegister') }}"><div class="reg-items one">VISITOR</div></a>
-                <a href="{{ url_for('placeRegister') }}"><div class="reg-items two">PLACE</div></a>
-                <a href="{{ url_for('hospitalSignin') }}"><div class="reg-items three">HOSPITAL</div></a>
-                <a href="{{ url_for('agentSignin') }}"><div class="reg-items four">AGENCY</div></a>                
-                
-                
-            </div>
-
+    <section class="smart-scroll">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark">
+          <a class="navbar-brand heading-black" href="/"> CORONA ARCHIVE </a>
+          <button
+            class="navbar-toggler navbar-toggler-right border-0"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span data-feather="grid"></span>
+          </button>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <section class="py-7 py-md-0 bg-hero" id="home">
+      <div class="container">
+        <div class="row vh-md-100">
+          <div class="col-md-8 col-sm-10 col-12 mx-au my-au text-center">
+            <h1 class="heading-black text-capitalize">
+              Welcome to Corona Archive & Help us control the spread of the
+              virus
+            </h1>
+            <p
+              class="lead py-3"
+              style="
+                font-size: large;
+                font-family: Arial, Helvetica, sans-serif;
+              "
+            >
+              Corona Archive is a web service for tracking, displaying,
+              evaluating, and archiving of the Corona infections in a particular
+              location.
+            </p>
+            <br />
+            <a href="#bottom-choice">
+              <button
+                class="btn btn-primary d-inline-flex flex-row align-items-center"
+              >
+                Click here
+                <em class="ml-2" data-feather="arrow-right"></em>
+              </button>
+            </a>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <div class="row pt-5 table">
+      <div class="col-12 mx-auto">
+        <div class="user-type">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-primary mb-0 pt-4">Visitors</h2>
+              <div class="text-muted font-weight-medium mt-2">
+                Register as a visitor to keep track of Covid spread
+              </div>
+              <a href="/visitor-registration" class="btn btn-primary">
+                Register
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-primary mb-0 pt-4">Place Owner</h2>
+              <div class="text-muted font-weight-medium mt-2">
+                Keep track of Covid spread in your location
+              </div>
+              <a href="/place-registration" class="btn btn-primary">
+                Register
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-primary mb-0 pt-4">Hospital</h2>
+              <div class="text-muted font-weight-medium mt-2">
+                Register Hospitals & See new updates
+                <br />
+                <br />
+              </div>
+              <a href="/hospital-login" class="btn btn-primary"> Log in </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-primary mb-0 pt-4">Agent</h2>
+              <div class="text-muted font-weight-medium mt-2">
+                To update data & track infected visitors
+                <br />
+                <br />
+              </div>
+              <a href="/agent-login" class="btn btn-primary"> Log in </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="bottom-choice"></div>
+    </div>
 
-        
-       
-    
-
-{% endblock %}
-
-
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

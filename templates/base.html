@@ -2,65 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Home{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href=" {{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='css/corona-archive.css')}}"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"
       rel="stylesheet"
+      href="{{ url_for('static', filename='css/default.css')}}"
     />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    {% block head %} {% endblock%}
   </head>
+
   <body>
-    <div class="topnav">
-      <a href="{{ url_for('index') }}"> Home </a>
-      <a href="{{ url_for('visitorRegister') }}"> Visitor </a>
-      <a href="{{ url_for('placeRegister') }}"> Place </a>
-      <a href="{{ url_for('agentSignin') }}"> Agent </a>
-      <a href="{{ url_for('hospitalSignin') }}"> Hospital </a>
-    </div>
+    <section class="smart-scroll">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark">
+          <a class="navbar-brand heading-black" href="/"> CORONA ARCHIVE </a>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            {% block logout %}{% endblock %}
+          </div>
+        </nav>
+      </div>
+    </section>
 
-    {% block content %} {% endblock %} {% block impressum%}
-    <div class="impressum">
-      <p>
-        This website is student lab work and does not necessarily reflect Jacobs
-        University Bremen opinions. Jacobs University Bremen does not endorse
-        this site, nor is it checked by Jacobs University Bremen regularly, nor
-        is it part of the official Jacobs University Bremen web presence. For
-        each external link existing on this website, we initially have checked
-        that the target page does not contain contents which is illegal wrt.
-        German jurisdiction. However, as we have no influence on such contents,
-        this may change without our notice. Therefore we deny any responsibility
-        for the websites referenced through our external links from here.
-      </p>
-      <br />
-      <br />
-      <br />
-      <br />
-      <hr />
-
-      <h2 style="color: white">Contact:</h2>
-      <br />
-      <h3 style="color: white">Sprint 1</h3>
-      <ul>
-        <li>Diego Zablah: d.zablah@jacobs-university.de</li>
-        <li>Volen Terziev: v.terziev@jacobs-university.de</li>
-      </ul>
-
-      <h3 style="color: white">Sprint 2</h3>
-      <ul>
-        <li>Qais Qamhia: q.qamhia@jacobs-university.de</li>
-        <li>Vahid Nesro: v.nesro@jacobs-university.de</li>
-      </ul>
-      <h3 style="color: white">Sprint 3</h3>
-      <ul>
-        <li>Ilyas Benyamna: i.benyamna@jacobs-university.de</li>
-        <li>Ujjwal Khadka: u.khadka@jacobs-university.de</li>
-      </ul>
-    </div>
-    {% endblock %}
+    {% block body %} {% endblock %}
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/script.js')}}"
+    ></script>
   </body>
 </html>

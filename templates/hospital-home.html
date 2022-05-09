@@ -1,0 +1,87 @@
+{% extends 'base.html' %} 
+{% block logout %}
+<form class="logout-container" action="/logout">
+  <button class="nav-item" type="submit">LOGOUT</button>
+</form>
+{% endblock %}
+{% block head%}
+<title>Search for Visitor</title>
+{% endblock %} {% block body %}
+
+<div class="welcome">
+  <h1>Hello Hospital</h1>
+  <br />
+  <h3>Search & Mark visitors as Infected/Not infected</h3>
+</div>
+
+<div class="">
+  <div style="display: flex; margin: 0 auto">
+    <form
+      style="margin: 10px auto 100px"
+      class="cont cont-home"
+      action="hospital-home"
+      method="post"
+    >
+      <h2>Visitor Search</h2>
+      
+      <label>
+        <span>Full Name</span>
+        <input type="text" name="name" />
+      </label>
+      <br />
+     <button class="hospital-search-button" type="submit" class="submit">
+        Search
+      </button>
+    </form>
+    <form
+      style="margin: 10px auto 100px"
+      class="cont cont-home"
+      action="hospital-DB-status-change"
+      method="post"
+    >
+      <h2>Mark as Infected/not infected</h2>
+      
+      <label>
+        <span>Full Name</span>
+        <input type="text" name="name" />
+      </label>
+      <br />
+      <div style="display: flex; align-items: center; justify-content: center">
+        <input type="radio" id="infected" name="status" value="1" />
+        <label id="infected" for="infected">Infected</label>
+        <input type="radio" id="infected" name="status" value="0" />
+        <label id="infected" for="notinfected">Not Infected</label>
+      </div>
+      <button class="hospital-search-button" type="submit" class="submit">
+        Change Status
+      </button>
+    </form>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>full name</th>
+        <th>city</th>
+        <th>address</th>
+        <th>phone number</th>
+        <th>email</th>
+        <th>infected</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

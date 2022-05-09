@@ -1,68 +1,51 @@
-CREATE DATABASE
-IF NOT EXISTS seteam26;
+-- create database
+DROP database IF EXISTS `corona_archive`;
 
-USE `seteam26`;
+CREATE DATABASE `corona_archive`;
 
-DROP TABLE IF EXISTS `VisitorToPlaces`;
+USE `corona_archive`;
 
-DROP TABLE IF EXISTS `Visitor`;
-
-CREATE TABLE `Visitor` (
-  `citizen_id` int NOT NULL AUTO_INCREMENT,
-  `visitor_name` varchar(50) NOT NULL,
-  `address` varchar(150) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
-  `device_id` varchar(50) NOT NULL,
-  `infected` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`citizen_id`)
+-- create entity and relationship sets
+CREATE TABLE Visitor (
+    citizen_id INTEGER NOT NULL AUTO_INCREMENT,
+    visitor_name CHAR(70),
+    city CHAR(35),
+    address VARCHAR(70),
+    phone_number VARCHAR(20),
+    email VARCHAR(64),
+    device_id VARCHAR(70)last_name,
+    infected BOOLEAN DEFAULT false,
+    PRIMARY KEY (citizen_id)
 );
 
-DROP TABLE IF EXISTS `Places`;
-
-CREATE TABLE `Places` (
-  `place_id` int NOT NULL AUTO_INCREMENT,
-  `place_name` varchar(50) NOT NULL,
-  `address` varchar(150) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
-  `QRcode` varchar(150) NOT NULL,
-  PRIMARY KEY (`place_id`)
+CREATE TABLE PlaceOwner (
+    place_id INTEGER NOT NULL AUTO_INCREMENT,
+    place_name VARCHAR(70),
+    phone_no VARCHAR(20),
+    email VARCHAR(64),
+    address VARCHAR(70),
+    QRcode VARCHAR(70),
+    PRIMARY KEY (place_id)
 );
 
-
-
-CREATE TABLE `VisitorToPlaces` (
-  `entry_id` int NOT NULL AUTO_INCREMENT,
-  `QRcode` varchar(150) NOT NULL,
-  `device_id` varchar(50) NOT NULL,
-  `entry_timestamp` timestamp NOT NULL,
-  `exit_timestamp` timestamp,
-  `citizen_id` int NOT NULL,
-  `place_id` int NOT NULL,
-  PRIMARY KEY (`entry_id`),
-  FOREIGN KEY (`citizen_id`) REFERENCES Visitor(`citizen_id`),
-  FOREIGN KEY (`place_id`) REFERENCES Places(`place_id`)
-
-);
-DROP TABLE IF EXISTS `Agent`;
-
-CREATE TABLE `Agent` (
-  `agent_id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`agent_id`)
+CREATE TABLE Agent (
+    agent_id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(20),
+    password VARCHAR(70),
+    PRIMARY KEY (agent_id)
 );
 
-DROP TABLE IF EXISTS `Hospital`;
-
-CREATE TABLE `Hospital` (
-  `hospital_id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`hospital_id`)
+CREATE TABLE Hospital (
+    hospital_id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(20),
+    password VARCHAR(70),
+    PRIMARY KEY (hospital_id)
 );
 
--- CREATING USER
-CREATE USER 'seteam26'@'localhost' IDENTIFIED BY 'oi8CFtOc';
-GRANT ALL PRIVILEGES ON seteam26 . * TO 'seteam26'@'localhost';
+CREATE TABLE VisitorToPlace(
+    QRcode VARCHAR(70),
+    device_id VARCHAR(70),
+    entry_time DATETIME,
+    exit_time DATETIME,
+    PRIMARY KEY (QRcode, device_id, entry_time)
+);
