@@ -13,7 +13,7 @@ CREATE TABLE Visitor (
     address VARCHAR(70),
     phone_number VARCHAR(20),
     email VARCHAR(64),
-    device_id VARCHAR(70)last_name,
+    device_id VARCHAR(70),
     infected BOOLEAN DEFAULT false,
     PRIMARY KEY (citizen_id)
 );

@@ -9,22 +9,22 @@ insert into
 values
     ("testname", "testpassword");
     
-insert into 
+insert into
     PlaceOwner(place_name, phone_no, email, address)
 values
     ('testplacename','651651651561', 'place@email.com', 'College Ring');
 
 -- buffer data
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Fulton Durban', 'Novo Hamburgo', '450 American Parkway', '6084838102', '42a6fbfd-9230-451a-96b4-b6506046af17', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Laverna Jealous', 'Pensilvania', '726 Red Cloud Alley', '9305597514', '89cfec05-0999-422a-bc7f-d933abe3accc', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Iona Ninnotti', 'Xinchengzi', '0 Hansons Hill', '4999020610', '71b3bf30-20f8-4c1c-b2c3-eeeac27a0ba0', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Jocko Mayston', 'Lembang', '6 Russell Park', '9882207552', '81ee10bb-6023-453e-bb35-dec540cbcfb8', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Olimpia Davenport', 'Uthai', '964 Elka Parkway', '6579624611', '3156e7b0-c10b-447f-9110-1d5a5499690d', false);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Conn Murdy', 'Tongjing', '491 Blackbird Park', '5147028420', '89da0c5b-797e-49e5-98cf-6d14d0d4508b', false);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Curcio Wye', 'Jiabei', '98651 Gulseth Pass', '5507271002', 'bc5e7457-e1fc-4f4a-883d-39036dcaf6a7', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Hube Gooke', 'Hornówek', '116 Monterey Place', '8012509995', '753658f2-04c0-4078-8f91-0c9574c18445', false);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Klaus Perllman', 'Kesabpur', '29286 Basil Point', '2526505900', 'fbbfad4a-11a8-44c6-a95e-00d8f724bb39', true);
-insert into Visitor (visitor_name, city, address, phone_number, device_id, infected) values ('Rebecka Bambery', 'Cajamar', '8 Killdeer Court', '2574120468', '5ac58ff5-687e-4a3d-ad11-9bf6bbe2a6df', true);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Burtie Wessel', 'Mayahi', '194 Arrowood Terrace', '1631280701', 'bwessel0@toplist.cz', 'ba723f54-72a4-463f-8324-748ecbdc3316', false);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Dennet Wimlett', 'Naguanagua', '6536 Towne Pass', '1828588744', 'dwimlett1@cisco.com', '606ff439-ca46-423a-a7eb-2de86c64e0b4', false);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Honey Duckerin', 'Vřesina', '81943 Gulseth Trail', '7873449962', 'hduckerin2@imageshack.us', '704a5080-ee10-4e9b-844e-b7aca73df667', true);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Katee Kasting', 'Casais Brancos', '8 Hanson Hill', '4418575614', 'kkasting3@sohu.com', 'd9726e67-7fba-4b6a-99c2-55a8235ea19e', false);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Cirilo Moodycliffe', 'Bogoria', '50 2nd Plaza', '4726729852', 'cmoodycliffe4@cnn.com', '069f8232-b284-46d0-a8ec-e03dd3e492ad', true);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Avery Jurisch', 'Al Qaţīf', '280 Raven Terrace', '3881302971', 'ajurisch5@rakuten.co.jp', '6dad2eeb-d48f-454d-a961-e883d46278f0', true);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Allix Piscopiello', 'São José dos Pinhais', '1 Pierstorff Circle', '8536277727', 'apiscopiello6@senate.gov', 'cf2b12cf-2cd1-4ccf-b148-db1c79e1409b', true);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Shirlee Stopp', 'Bago City', '61551 Autumn Leaf Pass', '4092479453', 'sstopp7@ameblo.jp', '0018325e-2803-4df3-9ae7-d9b456be7e16', false);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Kristoforo Lainton', 'Torre', '683 Dwight Crossing', '6042895187', 'klainton8@ft.com', '4700aca7-4d48-469d-9377-758cd60f603e', false);
+insert into Visitor (visitor_name, city, address, phone_number, email, device_id, infected) values ('Brenna Jansens', 'Lourdes', '92370 Lake View Way', '5301162861', 'bjansens9@sciencedirect.com', '1cc188e4-8775-43dc-90b1-ed646a8f655f', false);
 
 insert into Placeowner (place_name, phone_no, email, address, QRcode) values ('First Trust Senior Loan Fund ETF', '9965948761', 'cdacca0@house.gov', '314 Maple Wood Point', 'fd125a74-9fd9-4067-8c72-3bb8819678a3');
 insert into Placeowner (place_name, phone_no, email, address, QRcode) values ('Cellect Biotechnology Ltd.', '7357346075', 'gskerme1@w3.org', '5 Del Sol Point', 'b852addf-6d26-409c-906b-4af423753045');
