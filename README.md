@@ -1,9 +1,5 @@
 # SE Sprint-04 Team-26
 
-## Contributors
-* Jona Bako
-* Zineb Laouzi
-
 ## Achievements / Improvements
 
 - [x] Created separate files inside sql folder, for database & table creation, and data population.
