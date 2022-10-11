@@ -1,5 +1,3 @@
-Corona Impact Project
-
 ## Achievements / Improvements
 
 - [x] Created separate files inside sql folder, for database & table creation, and data population.
