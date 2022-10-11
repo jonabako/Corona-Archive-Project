@@ -1,4 +1,4 @@
-# SE Sprint-04 Team-26
+Corona Impact Project
 
 ## Achievements / Improvements
 
