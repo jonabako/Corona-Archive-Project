@@ -143,7 +143,7 @@ $ python3 app.py
 - Windows
 ```powershell
 # Create virtual environment
-> virtualenv env
+> python -m virtualenv env
 
 # Start virtual environment
 > .\env\Scripts\activate
